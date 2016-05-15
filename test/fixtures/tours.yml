@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 1
+  title: MyText
+  timetable: MyText
+  created_at: 2016-05-15 07:58:01
+  updated_at: 2016-05-15 07:58:01
+
+two:
+  id: 1
+  title: MyText
+  timetable: MyText
+  created_at: 2016-05-15 07:58:01
+  updated_at: 2016-05-15 07:58:01
