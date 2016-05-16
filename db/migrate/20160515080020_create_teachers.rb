@@ -1,7 +1,6 @@
 class CreateTeachers < ActiveRecord::Migration
   def change
     create_table :teachers do |t|
-      t.integer :id
       t.text :name
       t.timestamp :created_at
       t.timestamp :updated_at
