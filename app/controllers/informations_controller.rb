@@ -1,13 +1,11 @@
 class InformationsController < ApplicationController
 
 def index
-  #uuidを元にInformationのdbからデータを取り出し代入
-  #@information = Information.find(uuid)
-
-  #uuidを元にUserのdbからデータを取り出し代入
-  user = User.where(uuid)
-  #idを元にInformationのdbからデータを取り出し代入
-  @information = Information.where(user.id)
+  skip_before_filter :verify_authenticity_token
+  #timestampのデータを受け取り、それより大きい(新しい)データを格納
+  @informations = Information.where("updated_at > ?",params[:latest_at] )
+  #informtaionsに格納したデータをjsonとして出力
+  render :json => @informations
 end
 
 end
