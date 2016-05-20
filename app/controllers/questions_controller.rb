@@ -23,9 +23,12 @@ end
 
 def delete
   #質問情報IDを元に削除する質問を絞り込む
-  @questions = Qusetion.where("and id = ?", id)
+  @questions = Qusetion.where("id = ?", params[:id])
+  #削除する質問が子を持っていた時子も削除する
+  @children_questions = Qusetion.where("children = ?", params[:id])
   #deletedをtrueに
   @qusetions.deleted = true
+  @children_questions.deletde = true
 end
 
 end
