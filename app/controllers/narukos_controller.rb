@@ -1,0 +1,2 @@
+class NarukosController < ApplicationController
+end
