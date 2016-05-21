@@ -18,16 +18,15 @@ class UsersController < ApplicationController
     @user.update(place_id: params[:place_id])
 
     @hoge = { status: "200 OK", foo: "bar"}
-    # render :json => @hoge
     render 'users/update'
   end
 
   def show
+    @user = User.find(params[:user_id])
     render 'users/show'
 =begin
     user_id = check_uuid(:params[:uuid])
     @user = User.find(user_id)
 =end
-    @user = User.find(params[:user_id])
   end
 end
