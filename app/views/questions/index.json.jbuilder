@@ -8,7 +8,7 @@ json.set! "MyQ_A" do
     #最新情報の子を代入 条件指定で子を絞る
     children_questions = Question.where("parent_id IS NOT NULL and updated_at > ? and parent_id = ? ", params[:latest_at], question.id)
     #"children":[... を
-    json.children!(children_questions) do |childQuestions|
+    json.children(children_questions) do |childQuestions|
         json.extract! childQuestions, :id, :user_id, :content, :deleted
         end
     end
@@ -24,7 +24,7 @@ json.set! "OtherQ_A" do
     #最新情報の子を代入 条件指定で子を絞る
     children_questions = Question.where("parent_id IS NOT NULL and updated_at > ? and parent_id = ? ", params[:latest_at], question.id)
     #"children":[... を
-    json.children!(children_questions) do |childQuestions|
+    json.children(children_questions) do |childQuestions|
         json.extract! childQuestions, :id, :user_id, :content, :deleted
       end
     end
