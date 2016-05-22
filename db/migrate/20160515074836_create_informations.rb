@@ -1,6 +1,6 @@
 class CreateInformation < ActiveRecord::Migration
   def change
-    create_table :information do |t|
+    create_table :informations do |t|
       t.text :title
       t.text :content
       t.text :place
