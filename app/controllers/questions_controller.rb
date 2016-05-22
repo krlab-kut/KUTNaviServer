@@ -1,6 +1,7 @@
 class QuestionsController < ApplicationController
 skip_before_filter :verify_authenticity_token
 
+
 def index
   #子のparent_idより出力すべき親idを求める parnt_id=親idを格納する配列
   parnt_id = Question.where("parent_id IS NOT NULL and updated_at > ? " , params[:latest_at]).pluck(:parent_id)
