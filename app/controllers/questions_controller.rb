@@ -31,15 +31,10 @@ def delete
   #質問情報IDを元に削除する質問を絞り込む
   questions = Question.where("id = ?", params[:id])
   #削除する質問が子を持っていた時子も削除する
-  #children_questions = Question.where("children = ?", params[:id])
+  children_questions = Question.where("parent_id = ?", params[:id])
   #deletedをtrueに
-  questions.deleted = true
-  #children_questions.deleted = true
-  #questions.update(deleted = true)
-  #children_questions.update(deleted = true)
-  #最後に保存を実行
-  #questions.save
-  #children_questions.save
+  questions.update_all("deleted = true")
+  children_questions.update_all("deleted = true")
 end
 
 end
