@@ -1,21 +1,175 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
+#親のデータ子持ち
 one:
   id: 1
   user_id: 1
-  parent_id: 1
-  content: MyText
+  parent_id: nil
+  content: parent1-1
   deleted: false
   created_at: 2016-05-15 07:33:14
-  updated_at: MyString
-  timestamp: MyString
+  updated_at: 2016-05-15 07:33:14
 
+
+#1を親としてもつ ユーザは親と同じ
 two:
-  id: 1
+  id: 2
   user_id: 1
   parent_id: 1
-  content: MyText
+  content: children2-1-1
   deleted: false
   created_at: 2016-05-15 07:33:14
-  updated_at: MyString
-  timestamp: MyString
+  updated_at: 2016-05-15 07:33:14
+
+
+#1を親としてもつ ユーザは親と別
+three:
+  id: 3
+  user_id: 2
+  parent_id: 1
+  content: children3-2-1
+  deleted: false
+  created_at: 2016-05-15 07:33:14
+  updated_at: 2016-05-15 07:33:14
+
+
+#親のデータ子持ち 古いデータ
+foure:
+  id: 4
+  user_id: 1
+  parent_id: nil
+  content: parent4-1_old
+  deleted: false
+  created_at: 2000-05-15 07:33:14
+  updated_at: 2000-05-15 07:33:14
+  timestamp: 2000-05-15 07:33:14
+
+#4の子供 親のデータが古い ユーザは一緒
+five:
+  id: 5
+  user_id: 1
+  parent_id: 4
+  content: children5-1-4
+  deleted: false
+  created_at: 2016-05-15 07:33:14
+  updated_at: 2016-05-15 07:33:14
+
+
+#古い親 子なし 表示させない用
+six:
+  id: 6
+  user_id: 1
+  parent_id: nil
+  content: parent6-1_old
+  deleted: false
+  created_at: 2000-05-15 07:33:14
+  updated_at: 2000-05-15 07:33:14
+
+
+#古い親 子あり 表示させない用
+seven:
+  id: 7
+  user_id: 1
+  parent_id: nil
+  content: parent7-1_old
+  deleted: false
+  created_at: 2000-05-15 07:33:14
+  updated_at: 2000-05-15 07:33:14
+
+
+#古い子 親は7 表示させない用
+eight:
+  id: 8
+  user_id: 1
+  parent_id: 7
+  content: children8-1-7_old
+  deleted: false
+  created_at: 2000-05-15 07:33:14
+  updated_at: 2000-05-15 07:33:14
+
+
+#other_user用 親のデータ子持ち
+nine:
+  id: 9
+  user_id: 2
+  parent_id: nil
+  content: parent9-2
+  deleted: false
+  created_at: 2016-05-15 07:33:14
+  updated_at: 2016-05-15 07:33:14
+
+
+#other_user用 9を親としてもつ ユーザは親と同じ
+ten:
+  id: 10
+  user_id: 2
+  parent_id: 9
+  content: children10-2-9
+  deleted: false
+  created_at: 2016-05-15 07:33:14
+  updated_at: 2016-05-15 07:33:14
+
+
+#other_user用 9を親としてもつ ユーザは親と別
+eleven:
+  id: 11
+  user_id: 3
+  parent_id: 9
+  content: childre11-3-9
+  deleted: false
+  created_at: 2016-05-15 07:33:14
+  updated_at: 2016-05-15 07:33:14
+
+
+#other_user用 親のデータ子持ち 古いデータ
+twelve:
+  id: 12
+  user_id: 2
+  parent_id: nil
+  content: parent12-2_old
+  deleted: false
+  created_at: 2000-05-15 07:33:14
+  updated_at: 2000-05-15 07:33:14
+
+
+#other_user用 12の子供 親のデータが古い ユーザは一緒
+thirteen:
+  id: 13
+  user_id: 2
+  parent_id: 12
+  content: children13-2-12
+  deleted: false
+  created_at: 2016-05-15 07:33:14
+  updated_at: 2016-05-15 07:33:14
+
+
+#other_user用 古い親 子なし 表示させない用
+fourteen:
+  id: 14
+  user_id: 2
+  parent_id: nil
+  content: parent14-2_old
+  deleted: false
+  created_at: 2000-05-15 07:33:14
+  updated_at: 2000-05-15 07:33:14
+
+
+#other_user用 古い親 子あり 表示させない用
+fifteen:
+  id: 15
+  user_id: 2
+  parent_id: nil
+  content: parent15-2_old
+  deleted: false
+  created_at: 2000-05-15 07:33:14
+  updated_at: 2000-05-15 07:33:14
+
+
+#other_user用 古い子 親は15 表示させない用
+sixteen:
+  id: 16
+  user_id: 2
+  parent_id: 15
+  content: children16-2-15_old
+  deleted: false
+  created_at: 2000-05-15 07:33:14
+  updated_at: 2000-05-15 07:33:14

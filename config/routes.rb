@@ -53,4 +53,11 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+  # information.json
+  get    '/information' => 'information#index'
+  # questions.json
+  get    '/questions'   => 'questions#index'
+  post   '/questions'   => 'questions#create'
+  delete '/questions'   => 'questions#delete'
 end

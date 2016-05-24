@@ -7,7 +7,6 @@ class CreateQuestions < ActiveRecord::Migration
       t.boolean :deleted
       t.timestamp :created_at
       t.string :updated_at
-      t.string :timestamp
 
       t.timestamps null: false
     end

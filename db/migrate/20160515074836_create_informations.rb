@@ -1,4 +1,4 @@
-class CreateInformation < ActiveRecord::Migration
+class CreateInformations < ActiveRecord::Migration
   def change
     create_table :information do |t|
       t.text :title
