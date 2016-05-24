@@ -54,8 +54,10 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
 
-  get '/information' => 'information#index'
-  get '/question/' => 'questions#index'
-  post '/questions' => 'questions#create'
-  delete '/questions' => 'questions#delete'
+  # information.json
+  get    '/information' => 'information#index'
+  # questions.json
+  get    '/questions'   => 'questions#index'
+  post   '/questions'   => 'questions#create'
+  delete '/questions'   => 'questions#delete'
 end

@@ -1,1 +1,1 @@
-json.set! :status, "200 OK"
+json.extract! @res, :status
