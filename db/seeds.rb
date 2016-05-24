@@ -5,3 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+3.times do |i|
+  Information.create(:title => "info#{i}", :content => "content#{i}", :place => "place#{i}", :start_at => "2016-05-2#{i} 00:00:00")
+end
