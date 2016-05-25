@@ -4,7 +4,6 @@ class InformationController < ApplicationController
   def index
     #timestamp形式のデータを受け取り、それより大きい(新しい)最新情報を格納
     @information = Information.where("updated_at > ?",params[:latest_at] )
-
   end
 
   private
