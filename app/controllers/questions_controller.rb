@@ -2,10 +2,16 @@ class QuestionsController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def index
-    #自分のIDを持つ最新情報の親と最新情報の子を持つ親を入れる
-    @my_questions = Question.where("user_id = ? and parent_id IS NULL", 1)
-    #他人のIDを持つ最新情報の親と最新情報の子を持つ親を入れる
-    @other_questions = Question.where("user_id != ? and parent_id IS NULL", 1)
+    id_of_updated_children = Question.where("parent_id IS NOT NULL and updated_at < ?", time_params[:latest_at]).pluck(:parent_id)
+    id_of_updated_children.uniq
+    @my_parent_questions = Question.where("user_id = ? and parent_id IS NULL", 1)
+    @other_parent_questions = Question.where("user_id != ? and parent_id IS NULL", 1)
+    if(!id_of_updated_children.empty?)
+      @my_parent_questions.where("updated_at > ? or IN(?)", time_params[:latest_at], id_of_updated_children)
+    end
+    if(!id_of_updated_children.empty?)
+      @other_parent_questions.where("updated_at > ? or IN(?)", time_params[:latest_at], id_of_updated_children)
+    end
   end
 
   def create
