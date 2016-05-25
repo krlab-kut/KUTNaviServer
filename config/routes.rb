@@ -1,4 +1,17 @@
 Rails.application.routes.draw do
+    # /user.json
+    get '/user' => 'users#show'
+    post '/user' => 'users#update'
+    # /information.json
+    get    '/information' => 'information#index'
+    # /questions.json
+    get    '/questions'   => 'questions#index'
+    post   '/questions'   => 'questions#create'
+    delete '/questions'   => 'questions#delete'
+    # /user.json
+    get '/naruko' => 'narukos#index'
+    post '/naruko' => 'narukos#create'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -7,7 +20,6 @@ Rails.application.routes.draw do
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
-
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
@@ -53,11 +65,4 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-
-  # information.json
-  get    '/information' => 'information#index'
-  # questions.json
-  get    '/questions'   => 'questions#index'
-  post   '/questions'   => 'questions#create'
-  delete '/questions'   => 'questions#delete'
 end
