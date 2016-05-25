@@ -1,1 +1,1 @@
-json.extract! @hogehoge, :status
+json.extract! @res, :status

@@ -1,35 +1,20 @@
 class NarukosController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
-  def time_search(dataTime, nowTime)
-    return true if dataTime > nowTime - 60
-    return false
-  end
-
   def index
 =begin
     user_id = check_uuid(:params[:uuid])
     @user = User.find(user_id)
 =end
-    @user = User.find(params[:user_id])
-    @bool = "false"
-    @narukos = Naruko.all
-    # 場所の特定
+    @user = User.find(index_params[:uuid])
+    @res = {"response": "false"}
+    @narukos = Naruko.where("created_at > ?", Time.now - 60)
     @narukos.each do |naruko|
-      if params[:place_id].to_i() == naruko[:place_id] then
-        @bool = "true"
+      if naruko[:place_id] == index_params[:place_id].to_i() then
+        @res[:response] = "true"
         break
       end
     end
-    # 時間の特定
-    @narukos.each do |naruko|
-      if (time_search(naruko[:created_at], Time.now))
-        @bool = "true"
-        break
-      end
-    end
-
-    render 'narukos/index'
   end
 
   def create
@@ -38,9 +23,20 @@ class NarukosController < ApplicationController
     @user = User.find(user_id)
 =end
     # naruko情報の登録
-    @user = User.find(params[:user_id])
-    @naruko = Naruko.create(place_id: params[:place_id])
-    @hogehoge = { status: "200 OK" }
-    render 'narukos/create'
+    @user = User.find(create_params[:uuid])
+    if @naruko = Naruko.create(place_id: create_params[:place_id])
+      @res = { status: "200 OK" }
+    else
+      @res = {status: "400 Bad_Request"}
+    end
+  end
+
+  private
+  def index_params
+    params.permit(:uuid, :place_id)
+  end
+
+  def create_params
+    params.permit(:uuid, :place_id)
   end
 end
