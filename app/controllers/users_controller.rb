@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
-  def show
+  def index
 =begin
     user_id = check_uuid(user_params[:uuid])
     @user = User.find(user_id)

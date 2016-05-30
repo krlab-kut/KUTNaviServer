@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
     # /user.json
-    get '/user' => 'users#show'
+    get '/user' => 'users#index'
     post '/user' => 'users#update'
     # /information.json
     get    '/information' => 'information#index'
