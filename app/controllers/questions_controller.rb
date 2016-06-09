@@ -2,15 +2,19 @@ class QuestionsController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def index
-    id_of_updated_children = Question.where("parent_id IS NOT NULL and updated_at < ?", time_params[:latest_at]).pluck(:parent_id)
-    id_of_updated_children.uniq
+    id_of_updated_children = Question.where("parent_id IS NOT NULL and updated_at > ?", index_params[:latest_at]).pluck(:parent_id)
+    id_of_updated_children = id_of_updated_children.uniq
     @my_parent_questions = Question.where("user_id = ? and parent_id IS NULL", 1)
     @other_parent_questions = Question.where("user_id != ? and parent_id IS NULL", 1)
-    if(!id_of_updated_children.empty?)
-      @my_parent_questions.where("updated_at > ? or IN(?)", time_params[:latest_at], id_of_updated_children)
+    if(id_of_updated_children.empty?)
+      @my_parent_questions = @my_parent_questions.where("updated_at > ?", index_params[:latest_at])
+    else
+      @my_parent_questions = @my_parent_questions.where("updated_at > ? or id IN(?)", index_params[:latest_at], id_of_updated_children)
     end
-    if(!id_of_updated_children.empty?)
-      @other_parent_questions.where("updated_at > ? or IN(?)", time_params[:latest_at], id_of_updated_children)
+    if(id_of_updated_children.empty?)
+      @other_parent_questions = @other_parent_questions.where("updated_at > ?", index_params[:latest_at])
+    else
+      @other_parent_questions = @other_parent_questions.where("updated_at > ? or id IN(?)", index_params[:latest_at], id_of_updated_children)
     end
   end
 
@@ -19,8 +23,8 @@ class QuestionsController < ApplicationController
     @question = Question.new
     #データをそれぞれ入力
     @question.user_id = 1
-    @question.parent_id = question_params[:parent_id]
-    @question.content = question_params[:content]
+    @question.parent_id = create_params[:parent_id]
+    @question.content = create_params[:content]
     @question.deleted = 0
     #最後に保存
     if @question.save
@@ -45,19 +49,16 @@ class QuestionsController < ApplicationController
   end
 
   private
-  def uuid_params
-    params.permit(:uuid)
+  def index_params
+    params.permit(:uuid, :latest_at)
   end
 
-  def question_params
-    params.require(:question).permit(:parent_id, :content)
-  end
-
-  def time_params
-    params.permit(:latest_at)
+  def create_params
+    params.permit(:uuid, :parent_id, :content)
   end
 
   def delete_params
-    params.permit(:id)
+    params.permit(:uuid, :id)
   end
+
 end
