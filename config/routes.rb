@@ -1,15 +1,15 @@
 Rails.application.routes.draw do
   root 'indexes#index'
 
-  devise_for :admins, controllers: {
-    sessions:      'admins/sessions',
-    passwords:     'admins/passwords',
-    registrations: 'admins/registrations'
+  devise_for :admin, controllers: {
+    sessions:      'admin/sessions',
+    passwords:     'admin/passwords',
+    registrations: 'admin/registrations'
   }
 
-  resource :admins, controller: 'admins/indexes', only: [ :index ] do
-    resource :information, controller: 'admins/information', only: [ :index, :create, :new, :edit, :show, :update, :destroy ]
-    resource :questions, controller: 'admins/questions', only: [ :index ]
+  resource :admin, controller: 'admin/indexes', only: [ :index ] do
+    resource :information, controller: 'admin/information', only: [ :index, :create, :new, :edit, :show, :update, :destroy ]
+    resource :questions, controller: 'admin/questions', only: [ :index ]
   end
 
   # /user.json
@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   get    '/naruko' => 'narukos#index'
   post   '/naruko' => 'narukos#create'
 
-  namespace :admins do
+  namespace :admin do
     get 'information/index'
     get 'information/create'
     get 'information/new'
@@ -35,7 +35,7 @@ Rails.application.routes.draw do
     get 'information/destroy'
   end
 
-  namespace :admins do
+  namespace :admin do
   get 'questions/index'
   end
 
