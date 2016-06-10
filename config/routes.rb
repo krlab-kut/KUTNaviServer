@@ -1,10 +1,20 @@
 Rails.application.routes.draw do
-  devise_for :admins
   root 'indexes#index'
 
+  devise_for :admins, :controllers => {
+    :sessions      => 'admins/sessions'
+    :passwords     => 'admins/passwords'
+    :registrations => 'admins/registrations'
+  }
+
+  resource :admins, controller: 'admins/indexes', only: [ :index ] do
+    resource :information, controller: 'admins/information', only: [ :index, :create, :new, :edit, :show, :update, :destroy ]
+    resource :questions, controller: 'admins/questions', only: [ :index ]
+  end
+
   # /user.json
-  get '/user' => 'users#index'
-  post '/user' => 'users#update'
+  get    '/user' => 'users#index'
+  post   '/user' => 'users#update'
   # /information.json
   get    '/information' => 'information#index'
   # /questions.json
@@ -12,8 +22,8 @@ Rails.application.routes.draw do
   post   '/questions'   => 'questions#create'
   delete '/questions'   => 'questions#delete'
   # /user.json
-  get '/naruko' => 'narukos#index'
-  post '/naruko' => 'narukos#create'
+  get    '/naruko' => 'narukos#index'
+  post   '/naruko' => 'narukos#create'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
