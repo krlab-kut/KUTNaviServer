@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
   root 'indexes#index'
 
-  devise_for :admins, :controllers => {
-    :sessions      => 'admins/sessions'
-    :passwords     => 'admins/passwords'
-    :registrations => 'admins/registrations'
+  devise_for :admins, controllers: {
+    sessions:      'admins/sessions',
+    passwords:     'admins/passwords',
+    registrations: 'admins/registrations'
   }
 
   resource :admins, controller: 'admins/indexes', only: [ :index ] do
@@ -24,6 +24,21 @@ Rails.application.routes.draw do
   # /user.json
   get    '/naruko' => 'narukos#index'
   post   '/naruko' => 'narukos#create'
+
+  namespace :admins do
+    get 'information/index'
+    get 'information/create'
+    get 'information/new'
+    get 'information/edit'
+    get 'information/show'
+    get 'information/update'
+    get 'information/destroy'
+  end
+
+  namespace :admins do
+  get 'questions/index'
+  end
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
