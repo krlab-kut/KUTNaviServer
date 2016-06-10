@@ -1,16 +1,18 @@
 Rails.application.routes.draw do
-    # /user.json
-    get '/user' => 'users#index'
-    post '/user' => 'users#update'
-    # /information.json
-    get    '/information' => 'information#index'
-    # /questions.json
-    get    '/questions'   => 'questions#index'
-    post   '/questions'   => 'questions#create'
-    delete '/questions'   => 'questions#delete'
-    # /user.json
-    get '/naruko' => 'narukos#index'
-    post '/naruko' => 'narukos#create'
+  root 'indexes#index'
+
+  # /user.json
+  get '/user' => 'users#index'
+  post '/user' => 'users#update'
+  # /information.json
+  get    '/information' => 'information#index'
+  # /questions.json
+  get    '/questions'   => 'questions#index'
+  post   '/questions'   => 'questions#create'
+  delete '/questions'   => 'questions#delete'
+  # /user.json
+  get '/naruko' => 'narukos#index'
+  post '/naruko' => 'narukos#create'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
