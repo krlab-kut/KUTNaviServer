@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   resource :admin, controller: 'admin/indexes', only: [ :index ] do
     resource :information, controller: 'admin/information', only: [ :index, :create, :new, :edit, :show, :update, :destroy ]
+    resource :events, controller: 'admin/events', only: [ :index, :create, :new, :edit, :show, :update, :destroy ]
   end
 
   namespace :admin do
@@ -20,6 +21,8 @@ Rails.application.routes.draw do
   post   '/user' => 'users#update'
   # /information.json
   get    '/information' => 'information#index'
+  # /events.json
+  get    '/events'  => 'events#index'
   # /questions.json
   get    '/questions'   => 'questions#index'
   post   '/questions'   => 'questions#create'
