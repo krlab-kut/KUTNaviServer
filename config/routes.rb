@@ -9,7 +9,10 @@ Rails.application.routes.draw do
 
   resource :admin, controller: 'admin/indexes', only: [ :index ] do
     resource :information, controller: 'admin/information', only: [ :index, :create, :new, :edit, :show, :update, :destroy ]
-    resource :questions, controller: 'admin/questions', only: [ :index ]
+  end
+
+  namespace :admin do
+    get 'questions/index'
   end
 
   # /user.json
@@ -24,21 +27,6 @@ Rails.application.routes.draw do
   # /user.json
   get    '/naruko' => 'narukos#index'
   post   '/naruko' => 'narukos#create'
-
-  namespace :admin do
-    get 'information/index'
-    get 'information/create'
-    get 'information/new'
-    get 'information/edit'
-    get 'information/show'
-    get 'information/update'
-    get 'information/destroy'
-  end
-
-  namespace :admin do
-  get 'questions/index'
-  end
-
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
