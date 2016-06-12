@@ -10,10 +10,8 @@ Rails.application.routes.draw do
   resource :admin, controller: 'admin/indexes', only: [ :index ] do
     resource :information, controller: 'admin/information', only: [ :index, :create, :new, :edit, :show, :update, :destroy ]
     resource :events, controller: 'admin/events', only: [ :index, :create, :new, :edit, :show, :update, :destroy ]
-  end
-
-  namespace :admin do
-    get 'questions/index'
+    resource :questions, controller: 'admin/questions', only: [ :index, :create, :new, :edit, :show, :update, :destroy ]
+    resource :answers, controller: 'admin/answers', only: [ :index, :create, :new, :edit, :show, :update, :destroy ]
   end
 
   # /user.json
@@ -27,6 +25,10 @@ Rails.application.routes.draw do
   get    '/questions'   => 'questions#index'
   post   '/questions'   => 'questions#create'
   delete '/questions'   => 'questions#delete'
+  # /answers.json
+  get    '/answers'   => 'answers#index'
+  post   '/answers'   => 'answers#create'
+  delete '/answers'   => 'answers#delete'
   # /user.json
   get    '/naruko' => 'narukos#index'
   post   '/naruko' => 'narukos#create'
