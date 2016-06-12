@@ -126,3 +126,4 @@ tramp
 /public/uploads
 
 thumbs.db
+.DS_Store

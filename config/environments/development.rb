@@ -38,4 +38,8 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+  # Devise用デフォルトURL (開発用)
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  # Devise用デフォルトURL (本番用)
+  #config.action_mailer.default_url_options = { host: 'kutnavi.pl.info.kochi-tech.ac.jp', port: 80 }
 end
