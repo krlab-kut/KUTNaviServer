@@ -14,17 +14,12 @@ class NarukosController < ApplicationController
 =end
     # naruko情報の登録
     GCMpush()
-    if true
-      @res = { status: "200 OK" }
-    else
-      @res = {status: "400 Bad_Request"}
-    end
+    @res = { status: "200 OK" }
   end
 
   private
   def create_params
     params.permit(:user_id, :place_id)
   end
-
 
 end
