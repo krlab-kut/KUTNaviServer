@@ -3,19 +3,19 @@ class UsersController < ApplicationController
 
   def index
 =begin
-    user_id = check_uuid(user_params[:uuid])
+    user_id = check_user_id(user_params[:user_id])
     @user = User.find(user_id)
 =end
-    user_id = show_params[:uuid]
+    user_id = show_params[:user_id]
     @res = $congestion_info
   end
 
   def update
 =begin
-    user_id = check_uuid(:params[:uuid])
+    user_id = check_user_id(:params[:user_id])
     @user = User.find(user_id)
 =end
-    @user = User.find(update_params[:uuid])
+    @user = User.find(update_params[:user_id])
 
     # 前にいた場所の混雑情報カウンタの値を1引く
     $congestion_info.each do |info|
@@ -42,6 +42,6 @@ class UsersController < ApplicationController
   end
 
   def update_params
-    params.require(:user).permit(:uuid, :place_id)
+    params.require(:user).permit(:user_id, :place_id)
   end
 end

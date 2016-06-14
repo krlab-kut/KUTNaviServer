@@ -8,6 +8,6 @@ class InformationController < ApplicationController
 
   private
   def index_params
-    params.require(:information).permit(:uuid, :latest_at)
+    params.require(:information).permit(:user_id, :latest_at)
   end
 end

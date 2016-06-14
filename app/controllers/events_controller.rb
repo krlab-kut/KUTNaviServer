@@ -8,6 +8,6 @@ class EventsController < ApplicationController
 
   private
   def index_params
-    params.require(:events).permit(:uuid, :latest_at)
+    params.require(:events).permit(:user_id, :latest_at)
   end
 end

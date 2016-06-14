@@ -50,15 +50,15 @@ class QuestionsController < ApplicationController
 
   private
   def index_params
-    params.permit(:uuid, :latest_at)
+    params.permit(:user_id, :latest_at)
   end
 
   def create_params
-    params.permit(:uuid, :parent_id, :content)
+    params.permit(:user_id, :parent_id, :content)
   end
 
   def delete_params
-    params.permit(:uuid, :id)
+    params.permit(:user_id, :id)
   end
 
 end
