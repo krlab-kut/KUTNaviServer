@@ -1,11 +1,8 @@
 class CreateLabs < ActiveRecord::Migration
   def change
     create_table :labs do |t|
-      t.text :name
-      t.text :nickname
       t.integer :place_id
-      t.integer :teacher_id
-      t.integer :floor
+      t.text :name
       t.timestamp :created_at
       t.timestamp :updated_at
 
