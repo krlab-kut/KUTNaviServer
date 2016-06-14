@@ -1,30 +1,20 @@
 class NarukosController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
-  def index
-=begin
-    user_id = check_uuid(:params[:uuid])
-    @user = User.find(user_id)
-=end
-    @user = User.find(index_params[:uuid])
-    @res = {"response": "false"}
-    @narukos = Naruko.where("created_at > ?", Time.now - 60)
-    @narukos.each do |naruko|
-      if naruko[:place_id] == index_params[:place_id].to_i() then
-        @res[:response] = "true"
-        break
-      end
-    end
+  def GCMpush
+    registration_ids = []
+    options = {data: {naruko: true}, collapse_key: "updated_score"}
+    $gcm.send(registration_ids, options)
   end
 
   def create
 =begin
-    user_id = check_uuid(:params[:uuid])
+    user_id = check_user_id(:params[:user_id])
     @user = User.find(user_id)
 =end
     # naruko情報の登録
-    @user = User.find(create_params[:uuid])
-    if @naruko = Naruko.create(place_id: create_params[:place_id])
+    GCMpush()
+    if true
       @res = { status: "200 OK" }
     else
       @res = {status: "400 Bad_Request"}
@@ -32,11 +22,9 @@ class NarukosController < ApplicationController
   end
 
   private
-  def index_params
-    params.permit(:uuid, :place_id)
+  def create_params
+    params.permit(:user_id, :place_id)
   end
 
-  def create_params
-    params.permit(:uuid, :place_id)
-  end
+
 end
