@@ -14,9 +14,9 @@ class NarukosController < ApplicationController
     @user = User.find(user_id)
 =end
     # naruko情報の登録
-    @user = User.where("place_id != ? and place_id = ?", create_params[:user_id], create_params[:place_id]).pluck(:id)
-    logger.debug(@user)
-    registration_ids = @user
+    ids = User.where("place_id != ? and place_id = ?", create_params[:user_id], create_params[:place_id]).pluck(:id).tp_s
+    logger.debug(ids)
+    registration_ids = ids
     options = {data: {message: "naruko"}, collapse_key: "updated_score"}
     response = $gcm.send(registration_ids, options)
     #GCMpush(@user)
