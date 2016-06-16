@@ -6,8 +6,18 @@ class UsersController < ApplicationController
     user_id = check_uuid(user_params[:uuid])
     @user = User.find(user_id)
 =end
-    user_id = show_params[:uuid]
-    @res = $congestion_info
+    #そもそもuser_idが無い、受け取れていない場合の判定
+    unless show_params.has_key?(:user_id)
+      @res = {"status": "400 Bad_Request"}
+      return
+    end
+    #受け取ったuser_idがデータベースに存在しない場合の判定
+    unless User.exists?(id: show_params[:user_id])
+      @res = {status: "404 Not_found"}
+      return
+    end
+    #ユーザIDの存在を確認したら混雑情報を渡す
+    @res = $congestion_info#プロトタイプでは適当な数値
   end
 
   def update
@@ -30,18 +40,19 @@ class UsersController < ApplicationController
 
     # user情報の更新
     if @user.update(place_id: update_params[:place_id])
-      @res = { status: "200 OK"}
+      @res = {status: "200 OK"}
     else
       @res = {status: "400 Bad_Request"}
     end
   end
 
   private
-  def show_params
-    params.permit(:place_id)
-  end
-
+def show_params
+  #user_idを返す
+  params.permit(:user_id)
+end
   def update_params
+    #userモデルのuuidとplaceを渡す
     params.require(:user).permit(:uuid, :place_id)
   end
 end
