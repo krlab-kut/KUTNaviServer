@@ -10,6 +10,17 @@ class UsersController < ApplicationController
     @res = $congestion_info
   end
 
+  def create
+    @user = User.new
+    @user.registration_id = create_params[:registration_id]
+
+    if @user.save
+      @res = { user_id: @user.id }
+    else
+      @res = { status: "500 ServerError"}
+    end
+  end
+
   def update
 =begin
     user_id = check_user_id(:params[:user_id])
@@ -36,12 +47,30 @@ class UsersController < ApplicationController
     end
   end
 
+  def registration
+    @user = User.find(registration_params[:user_id])
+
+    if @user.update(registration_id: registration_params[:registration_id])
+      @res = { status: "200 OK"}
+    else
+      @res = { status: "500 ServerError"}
+    end
+  end
+
   private
   def show_params
     params.permit(:place_id)
   end
 
+  def create_params
+    params.permit(:registration_id)
+  end
+
   def update_params
     params.require(:user).permit(:user_id, :place_id)
+  end
+
+  def registration_params
+    params.permit(:user_id, :registration_id)
   end
 end

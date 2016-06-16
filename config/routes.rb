@@ -15,8 +15,10 @@ Rails.application.routes.draw do
   end
 
   # /user.json
-  get    '/user' => 'users#index'
-  post   '/user' => 'users#update'
+  get    '/user'              => 'users#index'
+  post   '/user'              => 'users#update'
+  post    '/user/create'      => 'users#create'
+  post   '/user/registration' => 'users#registration'
   # /information.json
   get    '/information' => 'information#index'
   # /events.json
