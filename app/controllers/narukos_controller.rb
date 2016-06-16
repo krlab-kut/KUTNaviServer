@@ -14,7 +14,7 @@ class NarukosController < ApplicationController
     @user = User.find(user_id)
 =end
     # naruko情報の登録
-    ids = User.where("place_id != ?", create_params[:user_id]).pluck(:registration_id)
+    ids = User.where("user_id != ?", create_params[:user_id]).pluck(:registration_id)
     logger.debug(ids)
     registration_ids = ids
     options = {data: {message: "naruko"}, collapse_key: "updated_score"}
