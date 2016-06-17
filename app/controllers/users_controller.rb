@@ -2,12 +2,12 @@ class UsersController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def index
+    logger.debug("aaa+++++++++")
 =begin
     user_id = check_uuid(user_params[:uuid])
     @user = User.find(user_id)
 =end
     #そもそもuser_idが無い、受け取れていない場合の判定
-
     unless show_params.has_key?(:user_id)
       @res = {status: "400 Bad_Request"}
       return
@@ -48,8 +48,6 @@ class UsersController < ApplicationController
       info[:counter] += 1 if update_params[:place_id] == info[:place_id]
     end
     # user情報の更新
-    logger.debug("aaa+++++++++")
-    #dbのアップデート
     if @user.update(place_id: update_params[:place_id].to_i)
       @res = {status: "200 OK"}
     else
