@@ -6,6 +6,7 @@ unless @information.include?(:status)#エラーステータスを持っている
       json.extract! info, :title, :content, :place, :start_at
     end
   end
+  json.extract! @time, :timestamp
 else#異常ならstatusを返す
   json.extract! @information, :status
 end

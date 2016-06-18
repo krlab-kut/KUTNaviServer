@@ -14,6 +14,7 @@ class EventsController < ApplicationController
     end
     #timestamp形式のデータを受け取り、それより大きい(新しい)最新情報を格納
     @events = Event.where("updated_at > ?",index_params[:latest_at] )
+    @time = {timestamp: index_params[:latest_at]}
   end
 
   private
