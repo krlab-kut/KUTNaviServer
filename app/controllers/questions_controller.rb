@@ -2,6 +2,21 @@ class QuestionsController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def index
+    #そもそもuser_idとlatest_atが無い、受け取れていない場合の判定
+    unless index_params.has_key?(:user_id) && index_params.has_key?(:latest_at)
+      @my_questions = {status: "400 Bad_Request"}
+      return
+    end
+    #受け取ったuser_idがデータベースに存在しない場合の判定
+    unless User.exists?(id: index_params[:user_id])
+      @my_questions = {status: "404 Not_found"}
+      return
+    end
+    id_of_deleted_question = DeletedQuestion.select(:question_id)
+    @my_questions = Question.where("id NOT IN(?) and user_id = ? and updated_at > ? ", id_of_deleted_question, index_params[:user_id], index_params[:latest_at])
+    @other_questions = Question.where("id NOT IN(?) and user_id != ? and updated_at > ?", id_of_deleted_question, index_params[:user_id], index_params[:latest_at])
+    @deleted_questions_ids = Question.where("id IN(?) and updated_at > ?", id_of_deleted_question, index_params[:latest_at])
+=begin
     id_of_updated_children = Question.where("parent_id IS NOT NULL and updated_at > ?", index_params[:latest_at]).pluck(:parent_id)
     id_of_updated_children = id_of_updated_children.uniq
     @my_parent_questions = Question.where("user_id = ? and parent_id IS NULL", 1)
@@ -16,6 +31,7 @@ class QuestionsController < ApplicationController
     else
       @other_parent_questions = @other_parent_questions.where("updated_at > ? or id IN(?)", index_params[:latest_at], id_of_updated_children)
     end
+=end
   end
 
   def create
@@ -50,7 +66,7 @@ class QuestionsController < ApplicationController
 
   private
   def index_params
-    params.permit(:uuid, :latest_at)
+    params.permit(:user_id, :latest_at)
   end
 
   def create_params

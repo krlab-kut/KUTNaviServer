@@ -1,4 +1,24 @@
+unless @my_questions.include?(:status)#エラーステータスを持っているかの判定
+  json.set! "my_questions" do
+    json.array!(@my_questions) do |question|
+      json.extract! question, :id, :user_id, :title, :content
+    end
+  end
+  json.set! "other_questions" do
+    json.array!(@other_questions) do |question|
+      json.extract! question, :id, :user_id, :title, :content
+    end
+  end
+  json.set! "deleted_questions" do
+    json.array!(@deleted_questions_ids) do |question|
+      json.extract! question, :id
+    end
+  end
+else#異常ならstatusを返す
+  json.extract! @my_questions, :status
+end
 
+=begin
 #json.set!で{}を呼び出す {"MyQ&A" :
 json.set! "MyQ_A" do
   #json.array!で[]を呼び出す [id : ID...
@@ -28,3 +48,4 @@ json.set! "OtherQ_A" do
     end
   end
 end
+=end
