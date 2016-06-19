@@ -56,6 +56,7 @@ class QuestionsController < ApplicationController
     end
     #questionに新しいインスタンス作成
     logger.debug("3-------------------")
+    #新しいレコードを作る
     @question = Question.new
     #データをそれぞれ入力
     #@question.user_id = 1
@@ -85,6 +86,7 @@ class QuestionsController < ApplicationController
     end
     #questionに新しいインスタンス作成
     logger.debug("3-------------------")
+    #新しいレコードを作る
     @question = Question.new
     #データをそれぞれ入力
     #@question.user_id = 1
@@ -102,6 +104,28 @@ class QuestionsController < ApplicationController
   end
 
   def delete
+    #そもそもuser_idとlatest_atが無い、受け取れていない場合の判定
+    unless delete_params.has_key?(:user_id) && delete_params.has_key?(:id)
+      @res = {status: "400 Bad_Request"}
+      return
+    end
+    #受け取ったuser_idがデータベースに存在しない場合の判定
+    unless User.exists?(id: user_id_params[:user_id])
+      @res = {status: "404 Not_found"}
+      return
+    end
+    #新しいレコードを作る
+    @deleted = DeletedQuestion.new
+    #削除するidを追加
+    @deleted.question_id = delete_params[:id]
+    #新しいレコードを保存
+    if @deleted.save
+      @res = {status: "200 OK"}
+    else
+      @res = {status: "400 Bad_Request"}
+    end
+
+=begin
     #質問情報IDを元に削除する質問を絞り込む
     questions = Question.where("id = ?", delete_params[:id])
     #削除する質問が子を持っていた時子も削除する
@@ -112,6 +136,7 @@ class QuestionsController < ApplicationController
     else
       @res = {status: "400 Bad_Request"}
     end
+=end
   end
 
   private
@@ -122,7 +147,7 @@ class QuestionsController < ApplicationController
   def user_id_params
     params.permit(:user_id)
   end
-  
+
   def create_params
     params.require(:question).permit(:title, :content)
   end
@@ -132,7 +157,7 @@ class QuestionsController < ApplicationController
   end
 =end
   def delete_params
-    params.permit(:uuid, :id)
+    params.permit(:user_id, :id)
   end
 
 end
