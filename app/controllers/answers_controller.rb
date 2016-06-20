@@ -11,7 +11,7 @@ class AnswersController < ApplicationController
       @answer = {status: "404 Not_found"}
       return
     end
-    @answer = Answer.where("question_id = ? && updated_at > ?", index_params[:question_id], index_params[:latest_at])
+    @answer = Answer.where("question_id = ?", index_params[:question_id])
     @time = {timestamp: index_params[:latest_at]}
   end
 
