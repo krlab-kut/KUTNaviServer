@@ -3,7 +3,8 @@ unless @information.include?(:status)#エラーステータスを持っている
   json.set! "information" do
     json.array!(@information) do |info|
       #json.extrat!でデータベース内のデータを表示する
-      json.extract! info, :title, :content, :place, :start_at
+      json.extract! info, :id, :content
+      #json.extract! info, :title, :content, :place, :start_at
     end
   end
   json.extract! @time, :timestamp

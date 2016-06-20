@@ -4,24 +4,20 @@ class QuestionsController < ApplicationController
   def index
     #そもそもuser_idとlatest_atが無い、受け取れていない場合の判定
     unless index_params.has_key?(:user_id) && index_params.has_key?(:latest_at)
-      @my_questions = {status: "400 Bad_Request"}
+      @questions = {status: "400 Bad_Request"}
       return
     end
     #受け取ったuser_idがデータベースに存在しない場合の判定
     unless User.exists?(id: index_params[:user_id])
-      @my_questions = {status: "404 Not_found"}
+      @questions = {status: "404 Not_found"}
       return
     end
     #削除されたIDを受け取る
     id_of_deleted_question = DeletedQuestion.select(:question_id)
-    #削除されていない自分のIDのデータを受け取る
-    @my_questions = Question.where("id NOT IN(?) and user_id = ? and updated_at > ? ", id_of_deleted_question, index_params[:user_id], index_params[:latest_at])
-    #削除されていない他人のIDのデータを受け取る
-    @other_questions = Question.where("id NOT IN(?) and user_id != ? and updated_at > ?", id_of_deleted_question, index_params[:user_id], index_params[:latest_at])
+    #削除されていないデータを受け取る
+    @questions = Question.where("id NOT IN(?) and updated_at > ? ", id_of_deleted_question, index_params[:latest_at])
     #削除された問題を受け取る
-    @@deleted_questions_ids = DeletedQuestion.where("updated_at > ?", index_params[:latest_at])
-    #@deleted_questions_ids = Question.where("id IN(?) and updated_at > ?", id_of_deleted_question, index_params[:latest_at])
-    #@deleted_questions_ids = id_of_deleted_question
+    @deleted_questions_ids = DeletedQuestion.where("updated_at > ?", index_params[:latest_at]).pluck(:id)
     #入力されたデータを受け取る
     @user = {user_id: index_params[:user_id]}
     @time = {timestamp: index_params[:latest_at]}
@@ -29,33 +25,9 @@ class QuestionsController < ApplicationController
 
   def create
     #そもそもuser_idとlatest_atが無い、受け取れていない場合の判定
-    unless user_id_params.has_key?(:user_id) && create_params.has_key?(:title) && create_params.has_key?(:content)
-      @res = {status: "400 Bad_Request"}
-      return
-    end
-    #受け取ったuser_idがデータベースに存在しない場合の判定
-    unless User.exists?(id: user_id_params[:user_id])
-      @res = {status: "404 Not_found"}
-      return
-    end
-    #questionに新しいインスタンス作成
-    #新しいレコードを作る
-    @question = Question.new
-    #データをそれぞれ入力
-    #@question.user_id = 1
-    @question.user_id = user_id_params[:user_id]
-    @question.title = create_params[:title]
-    @question.content = create_params[:content]
-    #最後に保存
-    if @question.save
-      @res = {status: "200 OK", id: user_id_params[:user_id]}
-    else
-      @res = {status: "400 Bad_Request"}
-    end
-
-=begin
-    #そもそもuser_idとlatest_atが無い、受け取れていない場合の判定
-    unless create_params.has_key?(:user_id) && create_params.has_key?(:title) && create_params.has_key?(:content)
+    logger.debug(create_params[:question])
+    unless create_params.has_key?(:user_id) && create_params[:question].has_key?(:title) && create_params[:question].has_key?(:content)
+      logger.debug("400")
       @res = {status: "400 Bad_Request"}
       return
     end
@@ -64,21 +36,16 @@ class QuestionsController < ApplicationController
       @res = {status: "404 Not_found"}
       return
     end
-    #questionに新しいインスタンス作成
-    #新しいレコードを作る
-    @question = Question.new
+    #questionに:user_idと:contentを渡して新しいインスタンス作成
+    @question = Question.new(create_params[:question])
     #データをそれぞれ入力
-    #@question.user_id = 1
     @question.user_id = create_params[:user_id]
-    @question.title = create_params[:title]
-    @question.content = create_params[:content]
     #最後に保存
     if @question.save
       @res = {status: "200 OK", id: create_params[:user_id]}
     else
       @res = {status: "400 Bad_Request"}
     end
-=end
   end
 
   def delete
@@ -104,28 +71,16 @@ class QuestionsController < ApplicationController
     else
       @res = {status: "400 Bad_Request"}
     end
-
   end
 
   private
   def index_params
     params.permit(:user_id, :latest_at)
   end
-
-  def user_id_params
-    params.permit(:user_id)
-  end
-
   def create_params
-    params.require(:question).permit(:title, :content)
+    params.permit(:user_id, question: [:title, :content])
   end
-=begin
-  def create_params
-    params.permit(:user_id ,:title, :content)
-  end
-=end
   def delete_params
     params.permit(:user_id, :id)
   end
-
 end

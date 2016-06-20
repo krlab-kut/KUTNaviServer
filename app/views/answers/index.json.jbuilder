@@ -8,5 +8,5 @@ unless @answer.include?(:status)#エラーステータスを持っているか�
   end
   json.extract! @time, :timestamp
 else#異常ならstatusを返す
-  json.extract! @information, :status
+  json.extract! @answer, :status
 end
