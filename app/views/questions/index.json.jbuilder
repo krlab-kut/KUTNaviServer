@@ -10,5 +10,5 @@ unless @questions.include?(:status)#エラーステータスを持っている�
   json.extract! @user, :user_id
   json.extract! @time, :timestamp
 else#異常ならstatusを返す
-  json.extract! @my_questions, :status
+  json.extract! @questions, :status
 end
