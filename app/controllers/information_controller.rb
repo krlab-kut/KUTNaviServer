@@ -12,9 +12,9 @@ class InformationController < ApplicationController
       @information = {status: "404 Not_found"}
       return
     end
-    #timestamp形式のデータを受け取り、それより大きい(新しい)最新情報を格納
+    #更新された最新情報を格納する
     @information = Information.where("updated_at > ?",index_params[:latest_at] )
-    #サーバの現在時刻を受け取る
+    #サーバの現在時刻を受け取り格納する
     @nowServerTime = {timestamp: Time.now.strftime("%Y-%m-%d %H:%M:%S")}
   end
 

@@ -12,6 +12,7 @@ class AnswersController < ApplicationController
       @answers = {status: "404 Not_found"}
       return
     end
+    #受け取ったquestion_idを持つ回答を格納する
     @answers = Answer.where("question_id = ?", index_params[:question_id])
   end
 

@@ -12,13 +12,13 @@ class QuestionsController < ApplicationController
       @questions = {status: "404 Not_found"}
       return
     end
-    #削除されていないデータを受け取る
+    #更新された問題を格納する
     @questions = Question.where("updated_at > ? ", index_params[:latest_at])
     #削除された問題を受け取る
     @deleted_questions_ids = DeletedQuestion.where("updated_at > ?", index_params[:latest_at]).pluck(:id)
-    #入力されたuser_idを受け取る
+    #入力されたuser_idを受け取り格納する
     @user_id = {user_id: index_params[:user_id]}
-    #サーバの現在時刻を受け取る
+    #サーバの現在時刻を受け取り格納する
     @nowServerTime = {timestamp: Time.now.strftime("%Y-%m-%d %H:%M:%S")}
   end
 

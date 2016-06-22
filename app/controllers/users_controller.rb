@@ -35,7 +35,7 @@ class UsersController < ApplicationController
       @res = {status: "404 Not_found"}
       return
     end
-    #user_idでモデルからデータを受け取る
+    #受け取ったuser_idを持つユーザの情報を格納する
     @user = User.find(update_params[:user_id])
     # 前にいた場所の混雑情報カウンタの値を1引く
     $congestion_info.each do |info|

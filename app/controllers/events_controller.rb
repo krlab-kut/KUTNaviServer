@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   skip_before_filter :verify_authenticity_token
-  
+
   def index
     #そもそもuser_idとlatest_atが無い、受け取れていない場合の判定
     unless index_params.has_key?(:user_id) && index_params.has_key?(:latest_at)
@@ -12,9 +12,9 @@ class EventsController < ApplicationController
       @events = {status: "404 Not_found"}
       return
     end
-    #timestamp形式のデータを受け取り、それより大きい(新しい)最新情報を格納
+    #更新されたイベント情報を受け取る
     @events = Event.where("updated_at > ?",index_params[:latest_at] )
-    #サーバの現在時刻を受け取る
+    #サーバの現在時刻を受け取り格納する
     @nowServerTime = {timestamp: Time.now.strftime("%Y-%m-%d %H:%M:%S")}
   end
 

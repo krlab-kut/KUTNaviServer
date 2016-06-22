@@ -9,7 +9,9 @@ unless @questions.include?(:status)#エラーステータスを持っている�
     #@deleted_questions_ids内に格納したデータをjson形式で表示する
     json.array!(@deleted_questions_ids)
   end
+  #@user_id内に格納したuser_idを出力する
   json.extract! @user_id, :user_id
+  #@nowServerTime内に格納したサーバの現在の時刻をjson形式で表示する
   json.extract! @nowServerTime, :timestamp
 else#異常ならstatusを返す
   json.extract! @questions, :status
