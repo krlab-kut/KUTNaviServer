@@ -7,14 +7,15 @@ class InformationController < ApplicationController
       @information = {status: "400 Bad_Request"}
       return
     end
-    #受け取ったuser_idがデータベースに存在しない場合の判定
+    #受け取ったuser_idに対応するidを持つUserが存在しない場合の判定
     unless User.exists?(id: index_params[:user_id])
       @information = {status: "404 Not_found"}
       return
     end
     #timestamp形式のデータを受け取り、それより大きい(新しい)最新情報を格納
     @information = Information.where("updated_at > ?",index_params[:latest_at] )
-    @time = {timestamp: index_params[:latest_at]}
+    #サーバの現在時刻を受け取る
+    @nowServerTime = {timestamp: Time.now.strftime("%Y-%m-%d %H:%M:%S")}
   end
 
   private
