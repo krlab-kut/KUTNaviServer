@@ -1,5 +1,5 @@
 class AnswersController < ApplicationController
-require 'date'#Dateクラスを呼び出す
+
   def index
     #そもそもuser_idとquestion_idが無い、受け取れていない場合の判定
     unless index_params.has_key?(:user_id) && index_params.has_key?(:question_id)
