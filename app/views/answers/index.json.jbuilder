@@ -1,4 +1,4 @@
-unless @answers.include?(:status)#エラーステータスを持っているかの判定
+unless defined?(@res)
   json.set! "answers" do
     json.array!(@answers) do |answer|
       #@answers内に格納したデータをjson形式で表示する
@@ -6,5 +6,5 @@ unless @answers.include?(:status)#エラーステータスを持っているか�
     end
   end
 else#異常ならstatusを返す
-  json.extract! @answers, :status
+  json.extract! @res, :status
 end

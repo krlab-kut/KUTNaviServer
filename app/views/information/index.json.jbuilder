@@ -1,4 +1,4 @@
-unless @information.include?(:status)#エラーステータスを持っているかの判定
+unless defined?(@res)
   json.set! "information" do
     json.array!(@information) do |info|
       #@information内に格納したデータをjson形式で表示する
@@ -8,5 +8,5 @@ unless @information.include?(:status)#エラーステータスを持っている
   #@nowServerTime内に格納したサーバの現在の時刻をjson形式で表示する
   json.extract! @nowServerTime, :timestamp
 else#異常ならstatusを返す
-  json.extract! @information, :status
+  json.extract! @res, :status
 end

@@ -2,12 +2,12 @@ class InformationController < ApplicationController
   def index
     #そもそもuser_idとlatest_atが無い、受け取れていない場合の判定
     unless index_params.has_key?(:user_id) && index_params.has_key?(:latest_at)
-      @information = {status: "400 Bad_Request"}
+      @res = {status: "400 Bad_Request"}
       return
     end
     #受け取ったuser_idに対応するidを持つUserが存在しない場合の判定
     unless User.exists?(id: index_params[:user_id])
-      @information = {status: "404 Not_found"}
+      @res = {status: "404 Not_found"}
       return
     end
     #更新された最新情報を格納する

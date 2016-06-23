@@ -1,4 +1,4 @@
-unless @questions.include?(:status)#エラーステータスを持っているかの判定
+unless defined?(@res)
   json.set! "questions" do
     json.array!(@questions) do |question|
       #@question内に格納したデータをjson形式で表示する
@@ -14,5 +14,5 @@ unless @questions.include?(:status)#エラーステータスを持っている�
   #@nowServerTime内に格納したサーバの現在の時刻をjson形式で表示する
   json.extract! @nowServerTime, :timestamp
 else#異常ならstatusを返す
-  json.extract! @questions, :status
+  json.extract! @res, :status
 end
