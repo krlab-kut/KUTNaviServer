@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    unless create_params.has_key?(:user_id) && create_params.has_key?(:registration_id)
+    unless create_params.has_key?(:user_id) || create_params.has_key?(:registration_id)
       @res = {status: "400 Bad_Request"}
       return
     end
@@ -23,12 +23,11 @@ class UsersController < ApplicationController
     if create_params[:user_id] == nil
       @user = User.new
     else
+      unless User.exists?(id: create_params[:user_id])
+        @res = {status: "404 Not_found"}
+        return
+      end
       @user = User.find(create_params[:user_id])
-    end
-
-    unless User.exists?(id: index_params[:user_id])
-      @res = {status: "404 Not_found"}
-      return
     end
 
     @user.registration_id = create_params[:registration_id]
