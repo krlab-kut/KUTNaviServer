@@ -22,5 +22,4 @@ class NarukosController < ApplicationController
   def create_params
     params.permit(:user_id, :place_id)
   end
-
 end

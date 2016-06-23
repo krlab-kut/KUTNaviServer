@@ -1,76 +1,93 @@
 class UsersController < ApplicationController
-  skip_before_filter :verify_authenticity_token
-
   def index
-=begin
-    user_id = check_user_id(user_params[:user_id])
-    @user = User.find(user_id)
-=end
-    user_id = show_params[:user_id]
-    @res = $congestion_info
+    #そもそもuser_idが無い、受け取れていない場合の判定
+    unless index_params.has_key?(:user_id)
+      @res = {status: "400 Bad_Request"}
+      return
+    end
+    #受け取ったuser_idに対応するidを持つUserが存在しない場合の判定
+    unless User.exists?(id: index_params[:user_id])
+      @res = {status: "404 Not_found"}
+      return
+    end
+    #ユーザIDの存在を確認したら混雑情報を渡す
+    @res = $congestion_info#プロトタイプでは適当な数値
   end
 
   def create
-    @user = User.new
+    unless create_params.has_key?(:user_id) && create_params.has_key?(:registration_id)
+      @res = {status: "400 Bad_Request"}
+      return
+    end
+    if create_params[:user_id] == nil
+      @user = User.new
+    else
+      @user = User.find(create_params[:user_id])
+    end
+
+    unless User.exists?(id: index_params[:user_id])
+      @res = {status: "404 Not_found"}
+      return
+    end
+
     @user.registration_id = create_params[:registration_id]
 
-    if @user.save
-      @res = { user_id: @user.id }
+    if create_params[:user_id] == nil
+      if @user.save
+        @res = { user_id: @user.id }
+      else
+        @res = { status: "500 ServerError"}
+      end
     else
-      @res = { status: "500 ServerError"}
+      if @user.update
+        @res = { user_id: @user.id }
+      else
+        @res = { status: "500 ServerError"}
+      end
     end
+
   end
 
   def update
-=begin
-    user_id = check_user_id(:params[:user_id])
-    @user = User.find(user_id)
-=end
+    #user_idとplace_idが受け取れているかどうかの判定
+    unless update_params.has_key?(:user_id) && update_params.has_key?(:place_id)
+      @res = {status: "400 Bad_Request"}
+      return
+    end
+    #受け取ったquestion_idに対応するidを持つQuestionが存在しない場合の判定
+    unless User.exists?(id: update_params[:user_id])
+      @res = {status: "404 Not_found"}
+      return
+    end
+    #受け取ったuser_idを持つユーザの情報を格納する
     @user = User.find(update_params[:user_id])
-
     # 前にいた場所の混雑情報カウンタの値を1引く
     $congestion_info.each do |info|
       info[:counter] -= 1 if @user.place_id == info[:place_id]
       info[:counter] = 0 if info[:counter] < 0
     end
-
     # 今いる場所の混雑情報カウンタの値を加算する
     $congestion_info.each do |info|
       info[:counter] += 1 if update_params[:place_id] == info[:place_id]
     end
-
     # user情報の更新
     if @user.update(place_id: update_params[:place_id])
-      @res = { status: "200 OK"}
+      @res = {status: "200 OK"}
     else
       @res = {status: "400 Bad_Request"}
     end
   end
 
-  def registration
-    @user = User.find(registration_params[:user_id])
-
-    if @user.update(registration_id: registration_params[:registration_id])
-      @res = { status: "200 OK"}
-    else
-      @res = { status: "500 ServerError"}
-    end
-  end
-
   private
-  def show_params
-    params.permit(:place_id)
+  def index_params
+    params.permit(:user_id)
   end
 
   def create_params
-    params.permit(:registration_id)
+    params.permit(:user_id, :registration_id)
   end
 
   def update_params
-    params.require(:user).permit(:user_id, :place_id)
-  end
-
-  def registration_params
-    params.permit(:user_id, :registration_id)
+    params.permit(:user_id, :place_id)
   end
 end

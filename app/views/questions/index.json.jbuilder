@@ -1,30 +1,18 @@
-
-#json.set!で{}を呼び出す {"MyQ&A" :
-json.set! "MyQ_A" do
-  #json.array!で[]を呼び出す [id : ID...
-  json.array!(@my_parent_questions) do |question|
-    #json.extrat!でデータベース内のデータを表示する
-    json.extract! question, :id, :user_id, :content, :deleted
-    #最新情報の子を代入 条件指定で子を絞る
-    children_questions = Question.where("parent_id = ? ", question.id)
-    #"children":[... を
-    json.children(children_questions) do |childQuestion|
-      json.extract! childQuestion, :id, :user_id, :content, :deleted
+unless @questions.include?(:status)#エラーステータスを持っているかの判定
+  json.set! "questions" do
+    json.array!(@questions) do |question|
+      #@question内に格納したデータをjson形式で表示する
+      json.extract! question, :id, :user_id, :title, :content
     end
   end
-end
-
-#json.set!で{}を呼び出す {"OtherQ&A" :
-json.set! "OtherQ_A" do
-  #json.array!で[]を呼び出す [id : ID...
-  json.array!(@other_parent_questions) do |question|
-    #json.extrat!でデータベース内のデータを表示する
-    json.extract! question, :id, :user_id, :content, :deleted
-    #最新情報の子を代入 条件指定で子を絞る
-    children_questions = Question.where("parent_id = ? ", question.id)
-    #"children":[... を
-    json.children(children_questions) do |childQuestion|
-        json.extract! childQuestion, :id, :user_id, :content, :deleted
-    end
+  json.set! "deleted_questions" do
+    #@deleted_questions_ids内に格納したデータをjson形式で表示する
+    json.array!(@deleted_questions_ids)
   end
+  #@user_id内に格納したuser_idを出力する
+  json.extract! @user_id, :user_id
+  #@nowServerTime内に格納したサーバの現在の時刻をjson形式で表示する
+  json.extract! @nowServerTime, :timestamp
+else#異常ならstatusを返す
+  json.extract! @questions, :status
 end
