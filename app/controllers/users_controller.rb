@@ -1,6 +1,4 @@
 class UsersController < ApplicationController
-  skip_before_filter :verify_authenticity_token
-
   def index
     #そもそもuser_idが無い、受け取れていない場合の判定
     unless index_params.has_key?(:user_id)
