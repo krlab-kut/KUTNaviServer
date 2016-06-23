@@ -74,9 +74,11 @@ class QuestionsController < ApplicationController
   def index_params
     params.permit(:user_id, :latest_at)
   end
+
   def create_params
     params.permit(:user_id, question: [:title, :content])
   end
+  
   def delete_params
     params.permit(:user_id, :id)
   end

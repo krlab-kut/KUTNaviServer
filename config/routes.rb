@@ -15,8 +15,9 @@ Rails.application.routes.draw do
   end
 
   # /user.json
-  get    '/user' => 'users#index'
-  post   '/user' => 'users#update'
+  get    '/user'              => 'users#index'
+  post   '/user'              => 'users#update'
+  post    '/user/create'      => 'users#create'
   # /information.json
   get    '/information' => 'information#index'
   # /events.json
@@ -29,8 +30,7 @@ Rails.application.routes.draw do
   get    '/answers'   => 'answers#index'
   post   '/answers'   => 'answers#create'
   delete '/answers'   => 'answers#delete'
-  # /user.json
-  get    '/naruko' => 'narukos#index'
+  # /naruko.json
   post   '/naruko' => 'narukos#create'
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -14,6 +14,40 @@ class UsersController < ApplicationController
     @res = $congestion_info#プロトタイプでは適当な数値
   end
 
+  def create
+    unless create_params.has_key?(:user_id) && create_params.has_key?(:registration_id)
+      @res = {status: "400 Bad_Request"}
+      return
+    end
+    if create_params[:user_id] == nil
+      @user = User.new
+    else
+      @user = User.find(create_params[:user_id])
+    end
+
+    unless User.exists?(id: index_params[:user_id])
+      @res = {status: "404 Not_found"}
+      return
+    end
+
+    @user.registration_id = create_params[:registration_id]
+
+    if create_params[:user_id] == nil
+      if @user.save
+        @res = { user_id: @user.id }
+      else
+        @res = { status: "500 ServerError"}
+      end
+    else
+      if @user.update
+        @res = { user_id: @user.id }
+      else
+        @res = { status: "500 ServerError"}
+      end
+    end
+
+  end
+
   def update
     #user_idとplace_idが受け取れているかどうかの判定
     unless update_params.has_key?(:user_id) && update_params.has_key?(:place_id)
@@ -48,8 +82,12 @@ class UsersController < ApplicationController
   def index_params
     params.permit(:user_id)
   end
+
+  def create_params
+    params.permit(:user_id, :registration_id)
+  end
+
   def update_params
     params.permit(:user_id, :place_id)
   end
-
 end
