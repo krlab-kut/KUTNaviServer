@@ -1,6 +1,4 @@
 class InformationController < ApplicationController
-  skip_before_filter :verify_authenticity_token
-
   def index
     #そもそもuser_idとlatest_atが無い、受け取れていない場合の判定
     unless index_params.has_key?(:user_id) && index_params.has_key?(:latest_at)

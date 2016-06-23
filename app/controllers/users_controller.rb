@@ -2,17 +2,13 @@ class UsersController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def index
-=begin
-    user_id = check_uuid(user_params[:uuid])
-    @user = User.find(user_id)
-=end
     #そもそもuser_idが無い、受け取れていない場合の判定
-    unless show_params.has_key?(:user_id)
+    unless index_params.has_key?(:user_id)
       @res = {status: "400 Bad_Request"}
       return
     end
     #受け取ったuser_idに対応するidを持つUserが存在しない場合の判定
-    unless User.exists?(id: show_params[:user_id])
+    unless User.exists?(id: index_params[:user_id])
       @res = {status: "404 Not_found"}
       return
     end
@@ -21,10 +17,6 @@ class UsersController < ApplicationController
   end
 
   def update
-=begin
-    user_id = check_uuid(:params[:uuid])
-    @user = User.find(user_id)
-=end
     #user_idとplace_idが受け取れているかどうかの判定
     unless update_params.has_key?(:user_id) && update_params.has_key?(:place_id)
       @res = {status: "400 Bad_Request"}
@@ -55,7 +47,7 @@ class UsersController < ApplicationController
   end
 
   private
-  def show_params
+  def index_params
     params.permit(:user_id)
   end
   def update_params
