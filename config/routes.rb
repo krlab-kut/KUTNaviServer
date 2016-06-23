@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resource :events, controller: 'admin/events', only: [ :index, :create, :new, :edit, :show, :update, :destroy ]
     resource :questions, controller: 'admin/questions', only: [ :index, :create, :new, :edit, :show, :update, :destroy ]
     resource :answers, controller: 'admin/answers', only: [ :index, :create, :new, :edit, :show, :update, :destroy ]
+    resource :favorites, controller: 'admin/favorites', only: [ :index ]
   end
 
   # /user.json
@@ -32,6 +33,8 @@ Rails.application.routes.draw do
   delete '/answers'   => 'answers#delete'
   # /naruko.json
   post   '/naruko' => 'narukos#create'
+  # /favorites.json
+  post   '/favorites' => 'favorites#create'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

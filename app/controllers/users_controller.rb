@@ -19,6 +19,7 @@ class UsersController < ApplicationController
       @res = {status: "400 Bad_Request"}
       return
     end
+
     if create_params[:user_id] == nil
       @user = User.new
     else
@@ -45,7 +46,6 @@ class UsersController < ApplicationController
         @res = { status: "500 ServerError"}
       end
     end
-
   end
 
   def update

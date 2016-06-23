@@ -1,9 +1,8 @@
-class CreateAnswers < ActiveRecord::Migration
+class CreateFavorites < ActiveRecord::Migration
   def change
-    create_table :answers do |t|
+    create_table :favorites do |t|
       t.integer :user_id
-      t.integer :question_id
-      t.text :content
+      t.integer :place_id
       t.timestamp :created_at
       t.timestamp :updated_at
 
