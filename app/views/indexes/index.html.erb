@@ -1,2 +1,17 @@
-<h1>Indexes#index</h1>
-<p>Find me in app/views/indexes/index.html.erb</p>
+<% unless admin_signed_in? %>
+  <h1>トップページ</h1>
+<% else admin_signed_in? %>
+  <h1>管理画面トップページ</h1>
+
+  <p><%= link_to '最新情報一覧', admin_information_index_path(:admin_id) %></p>
+
+  <p><%= link_to 'イベント情報一覧', admin_events_path(:admin_id) %></p>
+
+  <p><%= link_to '質問情報一覧', admin_questions_path(:admin_id) %></p>
+
+  <p><%= link_to 'お気に入り情報', admin_favorites_path(:admin_id) %></p>
+
+  <p><%= link_to '研究室一覧', admin_labs_path(:admin_id) %></p>
+
+  <p><%= link_to '場所一覧', admin_places_path(:admin_id) %></p>
+<% end %>
