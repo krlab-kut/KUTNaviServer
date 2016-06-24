@@ -7,12 +7,12 @@ Rails.application.routes.draw do
     registrations: 'admin/registrations'
   }
 
-  resource :admin, controller: 'admin/indexes', only: [ :index ] do
-    resource :information, controller: 'admin/information', only: [ :index, :create, :new, :edit, :show, :update, :destroy ]
-    resource :events, controller: 'admin/events', only: [ :index, :create, :new, :edit, :show, :update, :destroy ]
-    resource :questions, controller: 'admin/questions', only: [ :index, :create, :new, :edit, :show, :update, :destroy ]
-    resource :answers, controller: 'admin/answers', only: [ :index, :create, :new, :edit, :show, :update, :destroy ]
-    resource :favorites, controller: 'admin/favorites', only: [ :index ]
+  resources :admin, controller: 'admin/indexes', only: [ :index ] do
+    resources :information, controller: 'admin/information', only: [ :index, :create, :new, :edit, :show, :update, :destroy ]
+    resources :events, controller: 'admin/events', only: [ :index, :create, :new, :edit, :show, :update, :destroy ]
+    resources :questions, controller: 'admin/questions', only: [ :index, :create, :new, :edit, :show, :update, :destroy ]
+    resources :answers, controller: 'admin/answers', only: [ :index, :create, :new, :edit, :show, :update, :destroy ]
+    resources :favorites, controller: 'admin/favorites', only: [ :index ]
   end
 
   # /user.json
