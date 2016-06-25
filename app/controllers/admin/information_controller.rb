@@ -1,6 +1,6 @@
 class Admin::InformationController < ApplicationController
   def index
-    @information_title = Information.select(:title)
+    @information = Information.all
   end
 
   def create
@@ -13,6 +13,7 @@ class Admin::InformationController < ApplicationController
   end
 
   def show
+    @information = Information.find(show_params[:id])
   end
 
   def update
@@ -20,4 +21,10 @@ class Admin::InformationController < ApplicationController
 
   def destroy
   end
+
+  private
+  def show_params
+    params.permit(:id)
+  end
+
 end

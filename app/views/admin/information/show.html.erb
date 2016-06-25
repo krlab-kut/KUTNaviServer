@@ -1,2 +1,22 @@
 <h1>Admins::Information#show</h1>
 <p>Find me in app/views/admins/information/show.html.erb</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Content</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><%= @information.title %></td>
+        <td><%= @information.content %></td>
+        <td><%= link_to 'Edit', {:controller => "information", :action => "new"}, {:method => :get} %></td>
+        <td><%= link_to 'Destroy', {:controller => "information", :action => "new"}, {:method => :get} %></td>
+      </tr>
+  </tbody>
+</table>
+
+<p><%= button_to 'Back', {:controller => "information", :action => "index"}, {:method => :get} %></p>

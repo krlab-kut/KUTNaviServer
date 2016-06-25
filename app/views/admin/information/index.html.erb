@@ -9,10 +9,10 @@
     </tr>
   </thead>
   <tbody>
-    <% @information_title.each do |information| %>
+    <% @information.each do |information| %>
       <tr>
         <td><%= information.title %></td>
-        <td><%= link_to 'Show', {:controller => "information", :action => "new"}, {:method => :get} %></td>
+        <td><%= link_to 'Show', {:controller => "information", :action => "show", :id => information.id}, {:method => :get} %></td>
         <td><%= link_to 'Edit', {:controller => "information", :action => "new"}, {:method => :get} %></td>
         <td><%= link_to 'Destroy', {:controller => "information", :action => "new"}, {:method => :get} %></td>
       </tr>
@@ -20,4 +20,4 @@
   </tbody>
 </table>
 <br>
-<p><%= button_to '最新情報新規作成', {:controller => "information", :action => "new"}, {:method => :get} %></p>
+<p><%= button_to 'New Information', {:controller => "information", :action => "new"}, {:method => :get} %></p>
