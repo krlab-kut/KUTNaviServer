@@ -1,5 +1,6 @@
 class Admin::InformationController < ApplicationController
   def index
+    @information_title = Information.select(:title)
   end
 
   def create
