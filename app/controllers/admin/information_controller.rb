@@ -4,6 +4,12 @@ class Admin::InformationController < ApplicationController
   end
 
   def create
+    @information = Information.new(create_params)
+    if @information.save
+      @save_checker = true
+    else
+      @save_checker = false
+    end
   end
 
   def new
@@ -26,6 +32,9 @@ class Admin::InformationController < ApplicationController
   private
   def show_params
     params.permit(:id)
+  end
+  def create_params
+    params.require(:information).permit(:title, :content)
   end
 
 end

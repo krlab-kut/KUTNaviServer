@@ -1,2 +1,9 @@
 <h1>Admins::Information#create</h1>
 <p>Find me in app/views/admins/information/create.html.erb</p>
+<% if @save_checker %>
+  <p>Informaion was successfully created.<p>
+  <p>title: <%= @information.title %></p>
+  <p>content: <%= @information.content %></p>
+<% else %>
+  <p>Information was failed created.</p>
+<% end %>

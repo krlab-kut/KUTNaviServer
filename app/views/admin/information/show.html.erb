@@ -6,6 +6,8 @@
     <tr>
       <th>Title</th>
       <th>Content</th>
+      <th>Place</th>
+      <th>Start_at</th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -13,6 +15,8 @@
       <tr>
         <td><%= @information.title %></td>
         <td><%= @information.content %></td>
+        <td><%= @information.place %></td>
+        <td><%= @information.start_at %></td>
         <td><%= link_to 'Edit', {:controller => "information", :action => "new"}, {:method => :get} %></td>
         <td><%= link_to 'Destroy', {:controller => "information", :action => "new"}, {:method => :get} %></td>
       </tr>
