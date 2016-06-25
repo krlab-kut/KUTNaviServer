@@ -1,2 +1,6 @@
 <h1>Admins::Information#new</h1>
 <p>Find me in app/views/admins/information/new.html.erb</p>
+
+<%= render 'form' %>
+
+<p><%= button_to 'Back', {:controller => "information", :action => "index"}, {:method => :get} %></p>

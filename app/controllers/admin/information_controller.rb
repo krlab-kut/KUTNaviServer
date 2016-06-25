@@ -7,6 +7,7 @@ class Admin::InformationController < ApplicationController
   end
 
   def new
+    @information = Information.new
   end
 
   def edit
