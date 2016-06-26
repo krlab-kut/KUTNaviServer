@@ -1,5 +1,4 @@
-<h1>Admins::Information#show</h1>
-<p>Find me in app/views/admins/information/show.html.erb</p>
+<h1>最新情報詳細</h1>
 
 <table>
   <thead>
@@ -23,4 +22,4 @@
   </tbody>
 </table>
 
-<p><%= button_to 'Back', {:controller => "information", :action => "index"}, {:method => :get} %></p>
+<p><%= link_to '最新情報一覧に戻る', {:controller => "information", :action => "index"} %></p>

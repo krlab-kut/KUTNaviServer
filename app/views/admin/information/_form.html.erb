@@ -1,4 +1,4 @@
-<%= form_for(@information, :url => { :controller => :information, :action => :create }) do |f| %>
+<%= form_for(@information, :url => { :controller => :information, :action => :create }, :html => {:id => @information.id}) do |f| %>
 <% if @information.errors.any? %>
   <div id="error_explanation">
     <h2><%= pluralize(@information.errors.count, "error") %> prohibited this practice from being saved:</h2>
@@ -25,7 +25,7 @@
   </div>
   <div class="field">
     <%= f.label :start_at %><br>
-    <%= f.text_field :start_at %>
+    <%= f.text_field  :start_at %>
   </div>
   <div class="actions">
     <%= f.submit %>

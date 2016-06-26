@@ -1,2 +1,37 @@
-<h1>Admins::Information#edit</h1>
-<p>Find me in app/views/admins/information/edit.html.erb</p>
+<h1>最新情報編集</h1>
+
+<%= form_for(@information, :url => { :controller => :information, :action => :update }, :html => {:id => @information.id}) do |f| %>
+<% if @information.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@information.errors.count, "error") %> prohibited this practice from being saved:</h2>
+
+    <ul>
+    <% @information.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :content %><br>
+    <%= f.text_area :content, size: "60*10" %>
+  </div>
+  <div class="field">
+    <%= f.label :place %><br>
+    <%= f.text_field :place %>
+  </div>
+  <div class="field">
+    <%= f.label :start_at %><br>
+    <%= f.text_field  :start_at %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<p><%= link_to '最新情報一覧に戻る', {:controller => "information", :action => "index"}%></p>
