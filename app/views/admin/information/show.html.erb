@@ -15,7 +15,7 @@
   </tbody>
 </table>
 
-<p><%= link_to 'Edit', {:controller => "information", :action => "new"}, {:method => :get} %> |
+<p><%= link_to 'Edit', {:controller => "information", :action => "edit"}, {:method => :get} %> |
 <%= link_to 'Destroy', {:controller => "information", :action => "destroy", :id => @information.id}, :method => :delete, data: { confirm: 'Are you sure?' } %></p>
 
 <p><%= link_to '最新情報一覧に戻る', {:controller => "information", :action => "index"} %></p>

@@ -1,6 +1,4 @@
-<h1>イベント情報編集</h1>
-
-<%= form_for(@events, :url => { :controller => :events, :action => :update }, :html => {:id => @events.id}) do |f| %>
+<%= form_for(@events, :url => { :controller => :events, :action => :create }) do |f| %>
 <% if @events.errors.any? %>
   <div id="error_explanation">
     <h2><%= pluralize(@events.errors.count, "error") %> prohibited this practice from being saved:</h2>
@@ -33,5 +31,3 @@
     <%= f.submit %>
   </div>
 <% end %>
-
-<p><%= link_to 'イベント情報一覧に戻る', {:controller => "events", :action => "index"}%></p>
