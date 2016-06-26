@@ -35,7 +35,11 @@ class Admin::InformationController < ApplicationController
 
   def destroy
     @information = Information.find(id_params[:id])
-    @information.destroy
+    if @information.destroy
+      @destroy_checker = true
+    else
+      @destroy_checker = false
+    end
   end
 
   private
