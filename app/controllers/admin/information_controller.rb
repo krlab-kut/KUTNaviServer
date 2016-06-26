@@ -47,7 +47,7 @@ class Admin::InformationController < ApplicationController
     params.permit(:id)
   end
   def information_params
-    params.require(:information).permit(:title, :content, :place, :start_at)
+    params.require(:information).permit(:title, :content)
   end
 
 end
