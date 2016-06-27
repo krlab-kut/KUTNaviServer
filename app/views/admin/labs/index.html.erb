@@ -11,6 +11,7 @@
   <% @labs.each do |lab| %>
     <tr>
       <td><%= lab.name %></td>
+      <td><%= Place.find_by(id: lab.place_id).name %></td>
       <td><%= link_to 'Edit', edit_admin_lab_path(:admin_id, lab) %></td>
       <td><%= link_to 'Destroy', admin_lab_path(:admin_id, lab),
                   method: :delete, data: { confirm: 'Are you sure?' } %></td>
