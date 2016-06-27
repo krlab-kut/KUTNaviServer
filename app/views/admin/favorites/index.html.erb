@@ -1,2 +1,18 @@
 <h1>Admin::Favorites#index</h1>
-<p>Find me in app/views/admin/favorites/index.html.erb</p>
+
+<table>
+  <tr>
+    <th>id</th>
+    <th>name</th>
+  </tr>
+
+    <% @labs.each do |lab| %>
+    <tr>
+      <td><%= lab.name %></td>
+      <td><%=  Favorite.where(lab_id: lab.id).size %></td>
+
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to 'Back', '/' %>
