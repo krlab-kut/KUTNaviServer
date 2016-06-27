@@ -1,18 +1,19 @@
-<h1>Admin::Favorites#index</h1>
+<h1>Favorites</h1>
 
 <table>
   <tr>
-    <th>id</th>
-    <th>name</th>
+    <th>lab</th>
+    <th>favorites</th>
   </tr>
 
     <% @labs.each do |lab| %>
     <tr>
       <td><%= lab.name %></td>
       <td><%=  Favorite.where(lab_id: lab.id).size %></td>
-
     </tr>
   <% end %>
 </table>
+
+<%= link_to 'Ranking', admin_favorite_path(:admin_id, 1) %><br>
 
 <%= link_to 'Back', '/' %>
