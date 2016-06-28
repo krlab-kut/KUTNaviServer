@@ -6,4 +6,5 @@
 <% else %>
   <p>最新情報の保存に失敗しました。</p>
 <% end %>
+<p><%= link_to '最新情報詳細を開く', {:controller => "information", :action => "show", :id => @information.id} %></p>
 <p><%= link_to '最新情報一覧に戻る', {:controller => "information", :action => "index"} %></p>

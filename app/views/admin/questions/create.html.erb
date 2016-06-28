@@ -2,8 +2,8 @@
 <% if @save_checker %>
   <p>以下の回答情報の作成を行いました。<p>
   <p>Content: <%= @answers.content %></p>
-  <p>Question_ID: <%= @answers.question_id %></p>
 <% else %>
   <p>回答情報の保存に失敗しました。</p>
 <% end %>
+<p><%= link_to '質問情報詳細を開く', {:controller => "questions", :action => "show", :id => @answers.question_id} %></p>
 <p><%= link_to '質問情報一覧に戻る', {:controller => "questions", :action => "show", :id => @answers.question_id} %></p>
