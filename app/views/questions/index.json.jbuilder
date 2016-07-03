@@ -5,9 +5,9 @@ unless defined?(@res)
       json.extract! question, :id, :user_id, :title, :content
     end
   end
-  json.set! "deleted_questions" do
+  json.set! "deleted_question_ids" do
     #@deleted_questions_ids内に格納したデータをjson形式で表示する
-    json.array!(@deleted_questions_ids)
+    json.array!(@deleted_question_ids)
   end
   #@user_id内に格納したuser_idを出力する
   json.extract! @user_id, :user_id
