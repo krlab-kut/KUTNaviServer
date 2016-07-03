@@ -1,0 +1,20 @@
+<h1>Show Ranking</h1>
+
+<table>
+  <tr>
+    <th>rank</th>
+    <th>lab</th>
+    <th>favorites</th>
+  </tr>
+  <% count = 0 %>
+  <% @rank.each { |lab, value| %>
+    <tr>
+      <% count += 1 %>
+      <td><%= count %></td>
+      <td><%= lab %></td>
+      <td><%= value %></td>
+    </tr>
+  <% } %>
+</table>
+
+<%= link_to 'Back', admin_favorites_path(:admin_id) %>

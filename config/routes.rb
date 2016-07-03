@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :admin, controller: 'admin/indexes', only: [ :index ] do
     resources :answers, controller: 'admin/answers', only: [ :index, :create, :new, :edit, :show, :update, :destroy ]
     resources :events, controller: 'admin/events', only: [ :index, :create, :new, :edit, :show, :update, :destroy ]
-    resources :favorites, controller: 'admin/favorites', only: [ :index ]
+    resources :favorites, controller: 'admin/favorites', only: [ :index, :show ]
     resources :information, controller: 'admin/information', only: [ :index, :create, :new, :edit, :show, :update, :destroy ]
     resources :labs, controller: 'admin/labs', only: [ :index, :create, :new, :edit, :show, :update, :destroy ]
     resources :places, controller: 'admin/places', only: [ :index, :create, :new, :edit, :show, :update, :destroy ]

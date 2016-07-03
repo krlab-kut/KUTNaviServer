@@ -1,1 +1,22 @@
-<h1>Admin::Labs#index</h1>
+<h1>Labs</h1>
+
+<%= link_to 'New Lab', new_admin_lab_path %>
+
+<table>
+  <tr>
+    <th>lab</th>
+    <th>place_id</th>
+  </tr>
+
+  <% @labs.each do |lab| %>
+    <tr>
+      <td><%= lab.name %></td>
+      <td><%= Place.find_by(id: lab.place_id).name %></td>
+      <td><%= link_to 'Edit', edit_admin_lab_path(:admin_id, lab) %></td>
+      <td><%= link_to 'Destroy', admin_lab_path(:admin_id, lab),
+                  method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to 'Back', '/' %>
