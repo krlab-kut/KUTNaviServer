@@ -11,7 +11,11 @@ class EventsController < ApplicationController
       return
     end
     #更新されたイベント情報を受け取る
-    @events = Event.where("updated_at > ?",index_params[:latest_at] )
+    unless index_params[:latest_at] == nil
+      @events = Event.where("updated_at > ?",index_params[:latest_at] )
+    else
+      @events = Event.All
+    end
     #サーバの現在時刻を受け取り格納する
     @nowServerTime = {timestamp: Time.now.strftime("%Y-%m-%d %H:%M:%S")}
   end
