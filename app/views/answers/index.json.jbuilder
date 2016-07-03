@@ -5,6 +5,7 @@ unless defined?(@res)
       json.extract! answer, :id, :content
     end
   end
+  json.extract! @nowServerTime, :timestamp
 else#異常ならstatusを返す
   json.extract! @res, :status
 end
