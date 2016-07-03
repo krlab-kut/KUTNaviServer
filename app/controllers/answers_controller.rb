@@ -13,6 +13,7 @@ class AnswersController < ApplicationController
     end
     #受け取ったquestion_idを持つ回答を格納する
     @answers = Answer.where("question_id = ?", index_params[:question_id])
+    @nowServerTime = {timestamp: Time.now.strftime("%Y-%m-%d %H:%M:%S")}
   end
 
   private
