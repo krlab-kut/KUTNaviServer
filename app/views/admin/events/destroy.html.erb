@@ -1,2 +1,7 @@
-<h1>Admin::Event#destroy</h1>
-<p>Find me in app/views/admin/event/destroy.html.erb</p>
+<h1>削除確認画面</h1>
+<% if @destroy_checker %>
+  <p>削除しました。<p>
+<% else %>
+  <p>削除に失敗しました。<p>
+<% end %>
+<p><%= link_to 'イベント情報一覧に戻る', {:controller => "events", :action => "index"}%></p>

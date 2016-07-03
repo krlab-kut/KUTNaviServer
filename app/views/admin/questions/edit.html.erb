@@ -1,0 +1,26 @@
+<h1>回答情報編集</h1>
+<%= form_for(@answers, :url => { :controller => :questions, :action => :update }, :html => {:id => @answers.id}) do |f| %>
+<% if @answers.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@answers.errors.count, "error") %> prohibited this practice from being saved:</h2>
+    <ul>
+    <% @answers.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+  <div class="field">
+    <%= f.label :content %><br>
+    <%= f.text_area :content, size: "60*10" %>
+  </div>
+  <div class="field">
+    <%= f.hidden_field :question_id %>
+    </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+<p><%= link_to '一つ前に戻る',:back =%></p>
+<p><%= link_to 'イベント情報一覧に戻る', {:controller => "questions", :action => "index"}%></p>

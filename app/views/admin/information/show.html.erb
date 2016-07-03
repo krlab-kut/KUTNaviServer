@@ -1,2 +1,21 @@
-<h1>Admins::Information#show</h1>
-<p>Find me in app/views/admins/information/show.html.erb</p>
+<h1>最新情報詳細</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Content</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><%= @information.title %></td>
+        <td><%= @information.content %></td>
+      </tr>
+  </tbody>
+</table>
+
+<p><%= link_to 'Edit', {:controller => "information", :action => "edit"}, {:method => :get} %> |
+<%= link_to 'Destroy', {:controller => "information", :action => "destroy", :id => @information.id}, :method => :delete, data: { confirm: 'Are you sure?' } %></p>
+
+<p><%= link_to '最新情報一覧に戻る', {:controller => "information", :action => "index"} %></p>

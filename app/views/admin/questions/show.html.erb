@@ -1,0 +1,39 @@
+<h1>質問情報詳細</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Content</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><%= @questions.title %></td>
+        <td><%= @questions.content %></td>
+      </tr>
+  </tbody>
+</table>
+<p><%= link_to '質問情報の削除', {:controller => "questions", :action => "destroy", :id => @questions.id}, :method => :delete, data: { confirm: 'Are you sure?' } %></p>
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Answers</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @answers.each do |answer| %>
+      <tr>
+        <td><%= answer.content %></td>
+        <td><%= link_to 'AnswerEdit', {:controller => "questions", :action => "edit", :id => answer.id}, {:method => :get} %></td>
+        <td><%= link_to 'AnswerDestroy', {:controller => "answers", :action => "destroy", :id => answer.id}, :method => :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p><%= link_to '新しい回答情報の作成', {:controller => "questions", :action => "new", :id => @questions.id}, {:method => :get} %> </p>
+<p><%= link_to '質問情報一覧に戻る', {:controller => "questions", :action => "index"} %></p>
