@@ -17,7 +17,7 @@ class QuestionsController < ApplicationController
       @questions = Question.All
     end
     #削除された問題を受け取る
-    @deleted_questions_ids = DeletedQuestion.where("updated_at > ?", index_params[:latest_at]).pluck(:id)
+    @deleted_question_ids = DeletedQuestion.where("updated_at > ?", index_params[:latest_at]).pluck(:id)
     #入力されたuser_idを受け取り格納する
     @user_id = {user_id: index_params[:user_id]}
     #サーバの現在時刻を受け取り格納する
