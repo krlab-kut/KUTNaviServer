@@ -11,7 +11,11 @@ class InformationController < ApplicationController
       return
     end
     #更新された最新情報を格納する
-    @information = Information.where("updated_at > ?",index_params[:latest_at] )
+    unless index_params[:latest_at] == nil
+      @information = Information.where("updated_at > ?",index_params[:latest_at] )
+    else
+      @information = Information.All
+    end
     #サーバの現在時刻を受け取り格納する
     @nowServerTime = {timestamp: Time.now.strftime("%Y-%m-%d %H:%M:%S")}
   end
