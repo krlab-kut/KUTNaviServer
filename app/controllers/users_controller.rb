@@ -10,31 +10,17 @@ class UsersController < ApplicationController
       @res = {status: "404 Not_found"}
       return
     end
-    places = Place.all#場所の情報を取得する
-    user_count = User.all.count#アプリ利用者の数を取得する 割合判定用
-    @res = []
-    places.each do |place|#場所ごとに混雑度を判定
-      #@res = Hash.new
-      users_place_counter = User.where("place_id = ?", place.id).count
+    @res = []#混雑情報格納用
+    $congestion_info.each do |info|#場所ごとに混雑度を判定
       #アプリ利用者の人数によって判定
-      if users_place_counter <= 4 #4人以下なら混雑度:低
+      if info[:counter] <= 4 #4人以下なら混雑度:低
         count = 0
-      elsif users_place_counter <= 8 #8人以下なら混雑度:中
+      elsif info[:counter] <= 8 #8人以下なら混雑度:中
         count = 1
       else #8人超えなら混雑度:高
         count = 2
       end
-=begin
-      #アプリ利用者の割合によって判定
-      if (users_place_counter.to_f / user_count)*100.round(2) <= 10 #アプリ利用者の10%以下なら混雑度:低
-        count = 0
-      elsif (users_place_counter.to_f / user_count)*100.round(2) <= 20 #アプリ利用者の20%以下なら混雑度:中
-        count = 1
-      else#アプリ利用者の20%超えなら混雑度:高
-        count = 2
-      end
-=end
-      @res << {place_id: place.id, counter: count}
+      @res << {place_id: info[:place_id], counter: count}
     end
   end
 
