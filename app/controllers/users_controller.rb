@@ -47,6 +47,17 @@ class UsersController < ApplicationController
     end
   end
 
+  def self.sayHello
+    # logger = Logger.new('log/task.log')
+    # logger.debug "debug"
+    $congestion_info.each do |info|
+      User.where(place_id: info[:place_id]).each do |user|
+        info[:counter] -= 1 if @user.update_at < Time.now - (60*5)
+        info[:counter] = 0 if info[:counter] < 0
+      end
+    end
+  end
+
   def update
     #user_idとplace_idが受け取れているかどうかの判定
     unless update_params.has_key?(:user_id) && update_params.has_key?(:place_id)

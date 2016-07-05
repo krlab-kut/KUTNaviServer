@@ -1,8 +1,10 @@
 namespace :regularly do
   desc "congestion_infoの更新"
 
-  task :update_congestion do
+  task update_congestion: :environment do
+  # taskdo
     logger = Logger.new('log/task.log')
-    logger.debug "debug"
+    logger.debug "test"
+    UsersController.sayHello
   end
 end

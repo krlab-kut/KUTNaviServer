@@ -23,6 +23,6 @@ set :environment, :development
 set :output, "log/cron.log"
 
 # log test
-every 1.minute do
+every 5.minute do
   rake "regularly:update_congestion"
 end
