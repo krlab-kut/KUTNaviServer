@@ -10,8 +10,8 @@ class UsersController < ApplicationController
       @res = {status: "404 Not_found"}
       return
     end
-    @res = []#混雑情報格納用
-    $congestion_info.each do |info|#場所ごとに混雑度を判定
+    @res = {congestions:[]}#混雑情報格納用
+    $congestion_info[:congestions].each do |info|#場所ごとに混雑度を判定
       #アプリ利用者の人数によって判定
       if info[:counter] <= 4 #4人以下なら混雑度:低
         count = 0
@@ -21,7 +21,7 @@ class UsersController < ApplicationController
         count = 2
       end
       #判定した混雑情報を配列に格納する
-      @res << {place_id: info[:place_id], counter: count}
+      @res[:congestions] << {place_id: info[:place_id], counter: count}
     end
   end
 
