@@ -20,6 +20,7 @@ class UsersController < ApplicationController
       else #8人超えなら混雑度:高
         count = 2
       end
+      #判定した混雑情報を配列に格納する
       @res << {place_id: info[:place_id], counter: count}
     end
   end
