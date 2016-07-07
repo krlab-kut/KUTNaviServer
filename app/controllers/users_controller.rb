@@ -10,8 +10,19 @@ class UsersController < ApplicationController
       @res = {status: "404 Not_found"}
       return
     end
-    #ユーザIDの存在を確認したら混雑情報を渡す
-    @res = $congestion_info#プロトタイプでは適当な数値
+    @res = []#混雑情報格納用
+    $congestion_info.each do |info|#場所ごとに混雑度を判定
+      #アプリ利用者の人数によって判定
+      if info[:counter] <= 4 #4人以下なら混雑度:低
+        count = 0
+      elsif info[:counter] <= 8 #8人以下なら混雑度:中
+        count = 1
+      else #8人超えなら混雑度:高
+        count = 2
+      end
+      #判定した混雑情報を配列に格納する
+      @res << {place_id: info[:place_id], counter: count}
+    end
   end
 
   def create
