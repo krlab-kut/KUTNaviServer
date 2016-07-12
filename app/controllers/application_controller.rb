@@ -9,5 +9,7 @@ class ApplicationController < ActionController::Base
                         {place_id: 2, counter: 0}
                       ]
 
+  $time_stamp = nil
+
   protect_from_forgery with: :null_session
 end
