@@ -7,8 +7,8 @@ class ApplicationController < ActionController::Base
   $congestion_info = {
                         congestions:
                         [
-                          {place_id: 1, counter: 0},
-                          {place_id: 2, counter: 0}
+                          {place_id: 1, counter: 10},
+                          {place_id: 2, counter: 5}
                         ]
                      }
 
