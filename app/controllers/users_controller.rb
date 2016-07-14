@@ -10,7 +10,7 @@ class UsersController < ApplicationController
       @res = {status: "404 Not_found"}
       return
     end
-    @places = Place.All
+    @places = Place.all
     @res = {congestions:[]}#混雑情報格納用
 =begin
     $congestion_info[:congestions].each do |info|#場所ごとに混雑度を判定
