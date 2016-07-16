@@ -35,7 +35,7 @@ class UsersController < ApplicationController
       end
       #判定した混雑情報を配列に格納する
       @res[:congestions] << {place_id: i, counter: count}
-      i++
+      i += 1
     end
   end
 
