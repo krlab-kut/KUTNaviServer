@@ -23,6 +23,7 @@ class UsersController < ApplicationController
         count = 2
       end
 =end
+    i = 1
     @places.each do |p|#場所ごとに混雑度を判定
       #アプリ利用者の人数によって判定
       if p.counter <= 4 #4人以下なら混雑度:低
@@ -33,7 +34,8 @@ class UsersController < ApplicationController
         count = 2
       end
       #判定した混雑情報を配列に格納する
-      @res[:congestions] << {place_id: p.id, counter: count}
+      @res[:congestions] << {place_id: i, counter: count}
+      i++
     end
   end
 
