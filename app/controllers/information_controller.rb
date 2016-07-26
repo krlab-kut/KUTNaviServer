@@ -16,6 +16,10 @@ class InformationController < ApplicationController
     else
       @information = Information.All
     end
+    #削除された最新情報を受け取る
+    @deleted_informations = DeletedInformation.where("updated_at > ?", index_params[:latest_at]).pluck(:id)
+    #入力されたuser_idを受け取り格納する
+    @user_id = {user_id: index_params[:user_id]}
     #サーバの現在時刻を受け取り格納する
     @nowServerTime = {timestamp: Time.now.strftime("%Y-%m-%d %H:%M:%S")}
   end
