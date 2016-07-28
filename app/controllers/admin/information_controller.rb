@@ -35,6 +35,7 @@ class Admin::InformationController < ApplicationController
 
   def destroy
     @information = Information.find(id_params[:id])
+    DeletedInformation.create(information_id: id_params[:id])
     if @information.destroy
       @destroy_checker = true
     else

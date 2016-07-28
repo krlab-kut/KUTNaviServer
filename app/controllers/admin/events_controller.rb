@@ -35,6 +35,7 @@ class Admin::EventsController < ApplicationController
 
   def destroy
     @events = Event.find(id_params[:id])
+    DeletedEvent.create(event_id: id_params[:id])
     if @events.destroy
       @destroy_checker = true
     else

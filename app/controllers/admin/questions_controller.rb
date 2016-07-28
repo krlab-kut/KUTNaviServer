@@ -57,5 +57,5 @@ class Admin::QuestionsController < ApplicationController
   def answers_params
     params.require(:answer).permit(:content, :question_id)
   end
-  
+
 end
