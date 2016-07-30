@@ -22,7 +22,7 @@ class FavoritesController < ApplicationController
   end
 
   def delete
-    unless delete_params.has_key?(:user_id) && delete_params.has_key?(:id)
+    unless delete_params.has_key?(:user_id) && delete_params.has_key?(:place_id)
       @res = {status: "400 Bad_Request"}
       return
     end
