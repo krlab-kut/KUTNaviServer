@@ -26,7 +26,7 @@ end
   end
 end
 =end
-
+=begin
 Event.create(:title => "KUTガイダンス1", :content => "C102でKUTガイダンスが開かれます。", :place => "C102", :start_at => "2016-07-31 01:20:00", :end_at => "2016-07-31 01:50:00")
 Event.create(:title => "KUTガイダンス2", :content => "C102でKUTガイダンスが開かれます。", :place => "C102", :start_at => "2016-07-31 02:00:00", :end_at => "2016-07-31 02:30:00")
 Event.create(:title => "KUTガイダンス3", :content => "C102でKUTガイダンスが開かれます。", :place => "C102", :start_at => "2016-07-31 03:00:00", :end_at => "2016-07-31 03:30:00")
@@ -47,8 +47,8 @@ Event.create(:title => "MRIで人の脳を覗いてみよう2", :content => "「
 Event.create(:title => "MRIで人の脳を覗いてみよう3", :content => "「MRIで人の脳を覗いてみよう」が、A棟155教室でが開かれます。", :place => "A155", :start_at => "2016-07-31 03:00:00", :end_at => "2016-07-31 03:30:00")
 Event.create(:title => "MRIで人の脳を覗いてみよう4", :content => "「MRIで人の脳を覗いてみよう」が、A棟155教室でが開かれます。", :place => "A155", :start_at => "2016-07-31 04:00:00", :end_at => "2016-07-31 04:30:00")
 Event.create(:title => "MRIで人の脳を覗いてみよう5", :content => "「MRIで人の脳を覗いてみよう」が、A棟155教室でが開かれます。", :place => "A155", :start_at => "2016-07-31 05:00:00", :end_at => "2016-07-31 05:30:00")
-
-=begin
+=end
+Place.create(:name => "食堂", :counter => 0)
 Place.create(:name => "清水研", :counter => 0)
 Place.create(:name => "岩田研", :counter => 0)
 Place.create(:name => "篠森研", :counter => 0)
@@ -67,4 +67,4 @@ Place.create(:name => "松崎研", :counter => 0)
 Place.create(:name => "妻鳥研", :counter => 0)
 Place.create(:name => "吉田研", :counter => 0)
 Place.create(:name => "植田研", :counter => 0)
-=end
+
