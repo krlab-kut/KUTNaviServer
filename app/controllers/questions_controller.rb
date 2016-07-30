@@ -11,9 +11,13 @@ class QuestionsController < ApplicationController
       return
     end
     #更新された問題を格納する
-    @questions = Question.where("updated_at > ? ", index_params[:latest_at])
+    unless index_params[:latest_at] == nil
+      @questions = Question.where("updated_at > ? ", index_params[:latest_at])
+    else
+      @questions = Question.All
+    end
     #削除された問題を受け取る
-    @deleted_questions_ids = DeletedQuestion.where("updated_at > ?", index_params[:latest_at]).pluck(:id)
+    @deleted_questions = DeletedQuestion.where("updated_at > ?", index_params[:latest_at]).pluck(:question_id)
     #入力されたuser_idを受け取り格納する
     @user_id = {user_id: index_params[:user_id]}
     #サーバの現在時刻を受け取り格納する

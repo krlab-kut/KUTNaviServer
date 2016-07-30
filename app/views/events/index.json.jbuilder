@@ -2,8 +2,12 @@ unless defined?(@res)
   json.set! "events" do
     json.array!(@events) do |event|
       #@events内に格納したデータをjson形式で表示する
-      json.extract! event, :id, :title, :content, :place, :start_at
+      json.extract! event, :id, :title, :content, :place, :start_at, :end_at
     end
+  end
+  json.set! "deleted_events" do
+    #@deleted_events内に格納したデータをjson形式で表示する
+    json.array!(@deleted_events)
   end
   #@nowServerTime内に格納したサーバの現在の時刻をjson形式で表示する
   json.extract! @nowServerTime, :timestamp

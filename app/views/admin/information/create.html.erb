@@ -1,2 +1,10 @@
-<h1>Admins::Information#create</h1>
-<p>Find me in app/views/admins/information/create.html.erb</p>
+<h1>新しい最新情報作成結果</h1>
+<% if @save_checker %>
+  <p>以下の最新情報の作成を行いました。<p>
+  <p>Title: <%= @information.title %></p>
+  <p>Content: <%= @information.content %></p>
+<% else %>
+  <p>最新情報の保存に失敗しました。</p>
+<% end %>
+<p><%= link_to '最新情報詳細を開く', {:controller => "information", :action => "show", :id => @information.id} %></p>
+<p><%= link_to '最新情報一覧に戻る', {:controller => "information", :action => "index"} %></p>

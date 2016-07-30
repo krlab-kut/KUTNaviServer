@@ -41,6 +41,6 @@ class Admin::PlacesController < ApplicationController
 
   private
     def places_params
-      params.require(:place).permit(:name)
+      params.require(:place).permit(:name, :counter)
     end
 end

@@ -6,6 +6,7 @@
   <tr>
     <th>id</th>
     <th>name</th>
+    <th>counter</th?
   </tr>
 
   <% @places.each do |place| %>
@@ -13,7 +14,7 @@
       <td><%= place.id %></td>
       <td><%= place.name %></td>
       <td><%= link_to 'Edit', edit_admin_place_path(:admin_id, place) %></td>
-      <td><%= link_to 'Destroy', admin_place_path(:admin_id, place),
+      <td><%# link_to 'Destroy', admin_place_path(:admin_id, place),
                   method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
   <% end %>

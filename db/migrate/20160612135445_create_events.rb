@@ -4,7 +4,8 @@ class CreateEvents < ActiveRecord::Migration
       t.text :title
       t.text :content
       t.text :place
-      t.text :start_at
+      t.timestamp :start_at
+      t.timestamp :end_at
       t.timestamp :created_at
       t.timestamp :updated_at
 

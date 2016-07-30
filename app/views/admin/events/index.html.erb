@@ -1,2 +1,23 @@
-<h1>Admin::Event#index</h1>
-<p>Find me in app/views/admin/event/index.html.erb</p>
+<h1>イベント情報一覧</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @events.each do |event| %>
+      <tr>
+        <td><%= event.title %></td>
+        <td><%= link_to 'Show', {:controller => "events", :action => "show", :id => event.id}, {:method => :get} %></td>
+        <td><%= link_to 'Edit', {:controller => "events", :action => "edit", :id => event.id}, {:method => :get} %></td>
+        <td><%= link_to 'Destroy', {:controller => "events", :action => "destroy", :id => event.id}, :method => :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+<p><%= link_to '新しいイベント情報の作成', {:controller => "events", :action => "new"} %></p>
+<p><%= link_to '管理画面トップページに戻る', root_path(:admin_id) %></p>

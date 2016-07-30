@@ -6,11 +6,65 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+=begin
 3.times do |i|
-  Information.create(:title => "info#{i}", :content => "content#{i}", :place => "place#{i}", :start_at => "2016-05-2#{i} 00:00:00")
+  User.create(:place_id => "#{i}", :registration_id => "this-is-dummy-id#{i}")
 end
 
-Question.create(:user_id => 1, :parent_id => nil, :content => "Q1", :deleted => false)
-Question.create(:user_id => 1, :parent_id => 1, :content => "Q2", :deleted => false)
-Question.create(:user_id => 2, :parent_id => 1, :content => "Q3", :deleted => false)
-Question.create(:user_id => 2, :parent_id => nil, :content => "Q4", :deleted => false)
+3.times do |i|
+  Information.create(:title => "dummy-info#{i}", :content => "this is dummy-info#{i}.")
+end
+
+3.times do |i|
+  Event.create(:title => "dummy-event#{i}", :content => "this is dummy-event#{i}.", :place => "dummy-place#{i}", :start_at => "2016-07-17 0#{i}:00:00", :end_at => "2016-07-17 0#{i + 1}:00:00")
+end
+
+3.times do |i|
+  q = Question.create(:user_id => nil, :title => "dummy-question#{i}", :content => "this is dummy-question#{i}")
+  3.times do |j|
+    Answer.create(:user_id => nil, :question_id => q.id, :content => "this is dummy-answer#{j}.")
+  end
+end
+=end
+
+Event.create(:title => "KUTガイダンス1", :content => "C102でKUTガイダンスが開かれます。", :place => "C102", :start_at => "2016-07-31 01:20:00", :end_at => "2016-07-31 01:50:00")
+Event.create(:title => "KUTガイダンス2", :content => "C102でKUTガイダンスが開かれます。", :place => "C102", :start_at => "2016-07-31 02:00:00", :end_at => "2016-07-31 02:30:00")
+Event.create(:title => "KUTガイダンス3", :content => "C102でKUTガイダンスが開かれます。", :place => "C102", :start_at => "2016-07-31 03:00:00", :end_at => "2016-07-31 03:30:00")
+Event.create(:title => "KUTガイダンス4", :content => "C102でKUTガイダンスが開かれます。", :place => "C102", :start_at => "2016-07-31 04:00:00", :end_at => "2016-07-31 04:30:00")
+Event.create(:title => "KUTガイダンス5", :content => "C102でKUTガイダンスが開かれます。", :place => "C102", :start_at => "2016-07-31 05:00:00", :end_at => "2016-07-31 05:30:00")
+Event.create(:title => "スタディスキルズって？1", :content => "「スタディスキルズって？」が、B棟104教室で開かれます。", :place => "B104", :start_at => "2016-07-31 01:30:00", :end_at => "2016-07-31 02:00:00")
+Event.create(:title => "スタディスキルズって？2", :content => "「スタディスキルズって？」が、B棟104教室で開かれます。", :place => "B104", :start_at => "2016-07-31 04:30:00", :end_at => "2016-07-31 05:00:00")
+Event.create(:title => "先輩が案内するキャンパス見学ツアー1", :content => "「先輩が案内するキャンパス見学ツアー」が、総合案内前で開かれます。", :place => "総合案内前", :start_at => "2016-07-31 01:00:00", :end_at => "2016-07-31 01:00:00")
+Event.create(:title => "先輩が案内するキャンパス見学ツアー2", :content => "「先輩が案内するキャンパス見学ツアー」が、総合案内前で開かれます。", :place => "総合案内前", :start_at => "2016-07-31 02:00:00", :end_at => "2016-07-31 02:00:00")
+Event.create(:title => "先輩が案内するキャンパス見学ツアー3", :content => "「先輩が案内するキャンパス見学ツアー」が、総合案内前で開かれます。", :place => "総合案内前", :start_at => "2016-07-31 03:00:00", :end_at => "2016-07-31 03:00:00")
+Event.create(:title => "先輩が案内するキャンパス見学ツアー4", :content => "「先輩が案内するキャンパス見学ツアー」が、総合案内前で開かれます。", :place => "総合案内前", :start_at => "2016-07-31 04:00:00", :end_at => "2016-07-31 04:00:00")
+Event.create(:title => "先輩が案内するキャンパス見学ツアー5", :content => "「先輩が案内するキャンパス見学ツアー」が、総合案内前で開かれます。", :place => "総合案内前", :start_at => "2016-07-31 05:00:00", :end_at => "2016-07-31 05:00:00")
+Event.create(:title => "情報学群説明会", :content => "「情報学群説明会(情報通信技術者を目指す諸君へ)」が、A棟106教室で開かれます。", :place => "A106", :start_at => "2016-07-31 02:40:00", :end_at => "2016-07-31 03:20:00")
+Event.create(:title => "体験授業：ゲーム研究の過去・現在・未来", :content => "体験授業：「ゲーム研究の過去・現在・未来～コンピュータ将棋を題材にして〜」が、A棟106教室で開かれます。", :place => "A106", :start_at => "2016-07-31 04:00:00", :end_at => "2016-07-31 04:40:00")
+Event.create(:title => "体験授業：リアルとバーチャルの境界", :content => "体験授業：「リアルとバーチャルの境界～計測が切り拓くバーチャルフロンティア～」が、A棟106教室で開かれます。", :place => "A106", :start_at => "2016-07-31 05:00:00", :end_at => "2016-07-31 05:40:00")
+Event.create(:title => "MRIで人の脳を覗いてみよう1", :content => "「MRIで人の脳を覗いてみよう」が、A棟155教室でが開かれます。", :place => "A155", :start_at => "2016-07-31 01:00:00", :end_at => "2016-07-31 01:30:00")
+Event.create(:title => "MRIで人の脳を覗いてみよう2", :content => "「MRIで人の脳を覗いてみよう」が、A棟155教室でが開かれます。", :place => "A155", :start_at => "2016-07-31 02:00:00", :end_at => "2016-07-31 02:30:00")
+Event.create(:title => "MRIで人の脳を覗いてみよう3", :content => "「MRIで人の脳を覗いてみよう」が、A棟155教室でが開かれます。", :place => "A155", :start_at => "2016-07-31 03:00:00", :end_at => "2016-07-31 03:30:00")
+Event.create(:title => "MRIで人の脳を覗いてみよう4", :content => "「MRIで人の脳を覗いてみよう」が、A棟155教室でが開かれます。", :place => "A155", :start_at => "2016-07-31 04:00:00", :end_at => "2016-07-31 04:30:00")
+Event.create(:title => "MRIで人の脳を覗いてみよう5", :content => "「MRIで人の脳を覗いてみよう」が、A棟155教室でが開かれます。", :place => "A155", :start_at => "2016-07-31 05:00:00", :end_at => "2016-07-31 05:30:00")
+
+=begin
+Place.create(:name => "清水研", :counter => 0)
+Place.create(:name => "岩田研", :counter => 0)
+Place.create(:name => "篠森研", :counter => 0)
+Place.create(:name => "敷田研", :counter => 0)
+Place.create(:name => "中原研", :counter => 0)
+Place.create(:name => "濱村研", :counter => 0)
+Place.create(:name => "福本研", :counter => 0)
+Place.create(:name => "横山研", :counter => 0)
+Place.create(:name => "任研", :counter => 0)
+Place.create(:name => "鵜川研", :counter => 0)
+Place.create(:name => "門田研", :counter => 0)
+Place.create(:name => "栗原研", :counter => 0)
+Place.create(:name => "繁桝研", :counter => 0)
+Place.create(:name => "高田研", :counter => 0)
+Place.create(:name => "松崎研", :counter => 0)
+Place.create(:name => "妻鳥研", :counter => 0)
+Place.create(:name => "吉田研", :counter => 0)
+Place.create(:name => "植田研", :counter => 0)
+=end

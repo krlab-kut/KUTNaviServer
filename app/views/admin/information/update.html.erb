@@ -1,2 +1,10 @@
-<h1>Admins::Information#update</h1>
-<p>Find me in app/views/admins/information/update.html.erb</p>
+<h1>最新情報更新結果</h1>
+<% if @update_checker %>
+  <p>以下の様に最新情報の更新を行いました。<p>
+  <p>Title: <%= @information.title %></p>
+  <p>Content: <%= @information.content %></p>
+<% else %>
+  <p>最新情報の更新に失敗しました。</p>
+<% end %>
+<p><%= link_to '最新情報詳細を開く', {:controller => "information", :action => "show", :id => @information.id} %></p>
+<p><%= link_to '最新情報一覧に戻る', {:controller => "information", :action => "index"} %></p>

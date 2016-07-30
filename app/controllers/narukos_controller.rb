@@ -11,7 +11,7 @@ class NarukosController < ApplicationController
     ids = User.where("id != ?", create_params[:user_id]).pluck(:registration_id)
     logger.debug(ids)
     registration_ids = ids
-    options = {data: {message: "naruko"}, collapse_key: "updated_score"}
+    options = {data: {message: "naruko", count: create_params[:count]}, collapse_key: "updated_score"}
     response = $gcm.send(registration_ids, options)
     # GCMとクライアント側両方になげたい
     #GCMpush(@user)
@@ -20,6 +20,6 @@ class NarukosController < ApplicationController
 
   private
   def create_params
-    params.permit(:user_id, :place_id)
+    params.permit(:user_id, :place_id, :count)
   end
 end

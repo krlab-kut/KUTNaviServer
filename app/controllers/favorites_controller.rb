@@ -12,7 +12,7 @@ class FavoritesController < ApplicationController
       @favorite = Favoite.where("user_id = ?", create_params[:user_id])
     end
 
-    @favorite.place_id = create_params[:place_id]
+    @favorite.lab_id = create_params[:place_id]
 
     if create_params[:user_id] == nil
       if @user.save

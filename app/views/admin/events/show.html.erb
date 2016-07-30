@@ -1,2 +1,28 @@
-<h1>Admin::Event#show</h1>
-<p>Find me in app/views/admin/event/show.html.erb</p>
+<h1>イベント情報詳細</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Content</th>
+      <th>Place</th>
+      <th>Start_at</th>
+      <th>End_at</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><%= @events.title %></td>
+        <td><%= @events.content %></td>
+        <td><%= @events.place %></td>
+        <td><%= @events.start_at %></td>
+        <td><%= @events.end_at %></td>
+        <td
+      </tr>
+  </tbody>
+</table>
+
+<p><%= link_to 'Edit', {:controller => "events", :action => "edit"}, {:method => :get} %> |
+<%= link_to 'Destroy', {:controller => "events", :action => "destroy", :id => @events.id}, :method => :delete, data: { confirm: 'Are you sure?' } %></p>
+
+<p><%= link_to 'イベント情報一覧に戻る', {:controller => "events", :action => "index"} %></p>

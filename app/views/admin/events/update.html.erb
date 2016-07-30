@@ -1,2 +1,13 @@
-<h1>Admin::Event#update</h1>
-<p>Find me in app/views/admin/event/update.html.erb</p>
+<h1>イベント情報更新結果</h1>
+<% if @update_checker %>
+  <p>以下の様に最新情報の更新を行いました。<p>
+  <p>Title: <%= @events.title %></p>
+  <p>Content: <%= @events.content %></p>
+  <p>Place: <%= @events.place %></p>
+  <p>Start_at: <%= @events.start_at %></p>
+  <p>End_at: <%= @events.end_at %></p>
+<% else %>
+  <p>最新情報の更新に失敗しました。</p>
+<% end %>
+<p><%= link_to 'イベント情報詳細を開く', {:controller => "events", :action => "show", :id => @events.id} %></p>
+<p><%= link_to 'イベント情報一覧に戻る', {:controller => "events", :action => "index"} %></p>
