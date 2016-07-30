@@ -5,7 +5,7 @@ class Admin::FavoritesController < ApplicationController
 
   def show
     @favorites = Favorite.all
-    @labs = Lab.all
+    @labs = Place.all
     @rank = {}
     @labs.each do |lab|
       count = 0
