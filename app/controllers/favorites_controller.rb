@@ -6,7 +6,7 @@ class FavoritesController < ApplicationController
     end
     
     if Favorite.where("user_id = ? && lab_id = ?" ,create_params[:user_id], create_params[:place_id]).exists?
-      @res = [status: "200 OK"]
+      @res = {status: "200 OK"}
       return
     end
 
