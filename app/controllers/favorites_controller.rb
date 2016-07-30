@@ -9,7 +9,7 @@ class FavoritesController < ApplicationController
     @favorite.user_id = create_params[:user_id]
     @favorite.lab_id = create_params[:place_id]
 
-    if @user.save
+    if @favorite.save
       @res = { status: "200 OK" }
     else
       @res = { status: "500 ServerError"}
