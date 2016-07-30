@@ -16,6 +16,8 @@ class EventsController < ApplicationController
     else
       @events = Event.All
     end
+    #削除されたイベント情報を受け取る
+    @deleted_events = DeletedEvent.where("updated_at > ?", index_params[:latest_at]).pluck(:event_id)
     #サーバの現在時刻を受け取り格納する
     @nowServerTime = {timestamp: Time.now.strftime("%Y-%m-%d %H:%M:%S")}
   end

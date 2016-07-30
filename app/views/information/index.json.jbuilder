@@ -5,6 +5,10 @@ unless defined?(@res)
       json.extract! info, :id, :content
     end
   end
+  json.set! "deleted_information" do
+    #@deleted_information内に格納したデータをjson形式で表示する
+    json.array!(@deleted_information)
+  end
   #@nowServerTime内に格納したサーバの現在の時刻をjson形式で表示する
   json.extract! @nowServerTime, :timestamp
 else#異常ならstatusを返す
