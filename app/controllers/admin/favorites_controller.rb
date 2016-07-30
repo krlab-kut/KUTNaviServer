@@ -1,6 +1,6 @@
 class Admin::FavoritesController < ApplicationController
   def index
-    @labs = Lab.all
+    @labs = Place.all
   end
 
   def show
