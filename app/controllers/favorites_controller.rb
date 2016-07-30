@@ -4,6 +4,11 @@ class FavoritesController < ApplicationController
       @res = {status: "400 Bad_Request"}
       return
     end
+    
+    if Fovirite.exists?(user_id: create_params[:user_id], lab_id: create_params[:place_id])
+      @res = [status: "200 OK"]
+      return
+    end
 
     @favorite = Favorite.new
     @favorite.user_id = create_params[:user_id]
