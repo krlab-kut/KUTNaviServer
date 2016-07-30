@@ -10,7 +10,7 @@ class Admin::FavoritesController < ApplicationController
     @labs.each do |lab|
       count = 0
       @favorites.each do |favorite|
-        count += 1 if (lab.id - 16) == favorite.lab_id
+        count += 1 if (lab.id - 35) == favorite.lab_id
       end
       @rank[lab.name] = count
     end
