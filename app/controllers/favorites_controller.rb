@@ -5,7 +5,7 @@ class FavoritesController < ApplicationController
       return
     end
     
-    if Fovirite.exists?(user_id: create_params[:user_id], lab_id: create_params[:place_id])
+    if Fovirite.where("user_id = ? && lab_id = ?" ,create_params[:user_id], create_params[:place_id])exists?
       @res = [status: "200 OK"]
       return
     end
