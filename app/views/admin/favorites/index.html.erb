@@ -9,7 +9,7 @@
     <% @labs.each do |lab| %>
     <tr>
       <td><%= lab.name %></td>
-      <td><%=  Favorite.where(lab_id: lab.id).size %></td>
+      <td><%=  Favorite.where(lab_id: (lab.id - 16)).size %></td> #need fix
     </tr>
   <% end %>
 </table>
