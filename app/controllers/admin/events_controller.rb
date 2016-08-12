@@ -4,7 +4,7 @@ class Admin::EventsController < ApplicationController
   end
 
   def create
-    @events = Event.new(events_params)
+    @events = Event.new(create_params)
     if @events.save
       @save_checker = true
     else
@@ -17,15 +17,15 @@ class Admin::EventsController < ApplicationController
   end
 
   def edit
-    @events = Event.find(id_params[:id])
+    @events = Event.find(edit_params[:id])
   end
 
   def show
-    @events = Event.find(id_params[:id])
+    @events = Event.find(show_params[:id])
   end
 
   def update
-    @events = Event.find(id_params[:id])
+    @events = Event.find(update_params[:id])
     if @events.update(events_params)
       @update_checker = true
     else
@@ -48,6 +48,10 @@ class Admin::EventsController < ApplicationController
     params.permit(:id)
   end
 
+  def create_params
+    params.require(:event).permit(:title, :content, :place, :start_at, :end_at)
+  end
+
   def show_params
     params.permit(:id)
   end
@@ -58,10 +62,6 @@ class Admin::EventsController < ApplicationController
 
   def destroy_params
     params.permit(:id)
-  end
-
-  def events_params
-    params.require(:event).permit(:title, :content, :place, :start_at, :end_at)
   end
 
 end
