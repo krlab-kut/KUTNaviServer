@@ -4,15 +4,15 @@ class Admin::QuestionsController < ApplicationController
   end
 
   def new
-    @answers = Answer.new(question_id: id_params[:id])
+    @answers = Answer.new(question_id: new_params[:id])
   end
 
   def edit
-    @answers = Answer.find(id_params[:id])
+    @answers = Answer.find(edit_params[:id])
   end
 
   def create
-    @answers = Answer.new(answers_params)
+    @answers = Answer.new(answer_params)
     if @answers.save
       @save_checker = true
     else
@@ -21,13 +21,13 @@ class Admin::QuestionsController < ApplicationController
   end
 
   def show
-    @questions = Question.find(id_params[:id])
-    @answers = Answer.where("question_id = ?",id_params[:id])
+    @questions = Question.find(show_params[:id])
+    @answers = Answer.where("question_id = ?",show_params[:id])
   end
 
   def update
-    @answers = Answer.find(id_params[:id])
-    if @answers.update(answers_params)
+    @answers = Answer.find(show_params[:id])
+    if @answers.update(answer_params)
       @update_checker = true
     else
       @update_checker = false
@@ -35,9 +35,9 @@ class Admin::QuestionsController < ApplicationController
   end
 
   def destroy
-    @questions = Question.find(id_params[:id])
-    DeletedQuestion.create(question_id: id_params[:id])
-    @answers = Answer.where("question_id = ?", id_params[:id])
+    @questions = Question.find(show_params[:id])
+    DeletedQuestion.create(question_id: show_params[:id])
+    @answers = Answer.where("question_id = ?", show_params[:id])
     @answers.each do |answer|
       DeletedAnswer.create(answer_id: answer.id)
     end
@@ -50,11 +50,23 @@ class Admin::QuestionsController < ApplicationController
 
   private
 
-  def id_params
+  def new_params
     params.permit(:id)
   end
 
-  def answers_params
+  def edit_params
+    params.permit(:id)
+  end
+
+  def show_params
+    params.permit(:id)
+  end
+
+  def destroy_params
+    params.permit(:id)
+  end
+
+  def answer_params
     params.require(:answer).permit(:content, :question_id)
   end
 

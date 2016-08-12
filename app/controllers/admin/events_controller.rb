@@ -47,11 +47,7 @@ class Admin::EventsController < ApplicationController
   def edit_params
     params.permit(:id)
   end
-
-  def create_params
-    params.require(:event).permit(:title, :content, :place, :start_at, :end_at)
-  end
-
+  
   def show_params
     params.permit(:id)
   end
@@ -62,6 +58,10 @@ class Admin::EventsController < ApplicationController
 
   def destroy_params
     params.permit(:id)
+  end
+
+  def event_params
+    params.require(:event).permit(:title, :content, :place, :start_at, :end_at)
   end
 
 end

@@ -4,7 +4,7 @@ class Admin::PlacesController < ApplicationController
   end
 
   def create
-    @place = Place.new(places_params)
+    @place = Place.new(place_params)
     if @place.save
       redirect_to "/admin/#{:admin_id}/places"
     else
@@ -13,13 +13,13 @@ class Admin::PlacesController < ApplicationController
   end
 
   def edit
-    @place = Place.find(params[:id])
+    @place = Place.find(edit_params[:id])
   end
 
   def update
-    @place = Place.find(params[:id])
+    @place = Place.find(update_params[:id])
 
-    if @place.update(places_params)
+    if @place.update(place_params)
       redirect_to "/admin/#{:admin_id}/places"
     else
       render 'edit'
@@ -27,7 +27,7 @@ class Admin::PlacesController < ApplicationController
   end
 
   def destroy
-    @place = Place.find(params[:id])
+    @place = Place.find(destroy_params[:id])
     @place.destroy
     redirect_to "/admin/#{:admin_id}/places"
   end
@@ -40,7 +40,19 @@ class Admin::PlacesController < ApplicationController
 
 
   private
-    def places_params
+    def edit_params
+      params.permit(:id)
+    end
+
+    def update_params
+      params.permit(:id)
+    end
+
+    def destroy_params
+      params.permit(:id)
+    end
+
+    def place_params
       params.require(:place).permit(:name, :counter)
     end
 end

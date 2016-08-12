@@ -5,7 +5,7 @@ class Admin::LabsController < ApplicationController
   end
 
   def create
-    @lab = Lab.new(labs_params)
+    @lab = Lab.new(lab_params)
     if @lab.save
       redirect_to "/admin/#{:admin_id}/labs"
     else
@@ -41,7 +41,7 @@ class Admin::LabsController < ApplicationController
 
 
   private
-    def labs_params
+    def lab_params
       params.require(:lab).permit(:name, :place_id)
     end
 end
