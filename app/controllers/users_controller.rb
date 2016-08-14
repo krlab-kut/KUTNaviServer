@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+
+  before_action :update_congestion, only: [:index, :update]
+
   def index
     #そもそもuser_idが無い、受け取れていない場合の判定
     unless index_params.has_key?(:user_id)
@@ -100,5 +103,22 @@ class UsersController < ApplicationController
 
   def update_params
     params.permit(:user_id, :place_id)
+  end
+
+  def update_congestion
+    if ($time_stamp == nil || $time_stamp < Time.now - (60*5))
+      $congestion_info.each do |info|
+        User.where(place_id: info[:place_id]).each do |user|
+          if user.updated_at > Time.now - (60*5)
+            info[:counter] += 1
+          end
+          if user.updated_at > Time.now - (60*10) && user.updated_at <= Time.now - (60*5)
+            info[:counter] -= 1
+          end
+        end
+        info[:counter] = 0 if info[:counter] < 0
+      end
+      $time_stamp = Time.now
+    end
   end
 end
