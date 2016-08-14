@@ -5,6 +5,7 @@ class Admin::LabsController < ApplicationController
   end
 
   def new
+    @lab = Lab.new
   end
 
   def create
