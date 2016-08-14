@@ -45,7 +45,7 @@ class QuestionsController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
     #リクエストに必要なパラメータが含まれているか確認
     unless delete_params.has_key?(:user_id) && delete_params.has_key?(:id)
       @res = {status: "400 Bad_Request"}
@@ -77,7 +77,7 @@ class QuestionsController < ApplicationController
     params.permit(:user_id, question: [:title, :content])
   end
 
-  def delete_params
+  def destroy_params
     params.permit(:user_id, :id)
   end
 end

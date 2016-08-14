@@ -3,6 +3,9 @@ class Admin::PlacesController < ApplicationController
     @places = Place.all
   end
 
+  def new
+  end
+
   def create
     @place = Place.new(place_params)
     if @place.save
@@ -10,6 +13,9 @@ class Admin::PlacesController < ApplicationController
     else
       render 'new'
     end
+  end
+
+  def show
   end
 
   def edit
@@ -32,27 +38,20 @@ class Admin::PlacesController < ApplicationController
     redirect_to "/admin/#{:admin_id}/places"
   end
 
-  def new
-  end
-
-  def show
-  end
-
-
   private
-    def edit_params
-      params.permit(:id)
-    end
+  def edit_params
+    params.permit(:id)
+  end
 
-    def update_params
-      params.permit(:id)
-    end
+  def update_params
+    params.permit(:id)
+  end
 
-    def destroy_params
-      params.permit(:id)
-    end
+  def destroy_params
+    params.permit(:id)
+  end
 
-    def place_params
-      params.require(:place).permit(:name, :counter)
-    end
+  def place_params
+    params.require(:place).permit(:name, :counter)
+  end
 end

@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   # /user.json
   get    '/user'              => 'users#index'
   post   '/user'              => 'users#update'
-  post    '/user/create'      => 'users#create'
+  post   '/user/create'      => 'users#create'
   # /information.json
   get    '/information' => 'information#index'
   # /events.json
@@ -30,14 +30,14 @@ Rails.application.routes.draw do
   # /questions.json
   get    '/questions'   => 'questions#index'
   post   '/questions'   => 'questions#create'
-  delete '/questions'   => 'questions#delete'
+  delete '/questions'   => 'questions#destroy'
   # /answers.json
   get    '/answers'   => 'answers#index'
   post   '/answers'   => 'answers#create'
-  delete '/answers'   => 'answers#delete'
+  delete '/answers'   => 'answers#destroy'
   # /naruko.json
   post   '/naruko' => 'narukos#create'
   # /favorites.json
   post   '/favorites' => 'favorites#create'
-  delete '/favorites' => 'favorites#delete'
+  delete '/favorites' => 'favorites#destroy'
 end

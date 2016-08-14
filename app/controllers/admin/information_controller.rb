@@ -3,6 +3,10 @@ class Admin::InformationController < ApplicationController
     @information = Information.all
   end
 
+  def new
+    @information = Information.new
+  end
+
   def create
     @information = Information.new(information_params)
     if @information.save
@@ -12,16 +16,12 @@ class Admin::InformationController < ApplicationController
     end
   end
 
-  def new
-    @information = Information.new
+  def show
+    @information = Information.find(show_params[:id])
   end
 
   def edit
     @information = Information.find(edit_params[:id])
-  end
-
-  def show
-    @information = Information.find(show_params[:id])
   end
 
   def update
@@ -47,11 +47,11 @@ class Admin::InformationController < ApplicationController
   end
 
   private
-  def edit_params
+  def show_params
     params.permit(:id)
   end
 
-  def show_params
+  def edit_params
     params.permit(:id)
   end
 
