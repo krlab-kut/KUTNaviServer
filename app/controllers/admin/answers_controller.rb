@@ -4,8 +4,9 @@ class Admin::AnswersController < ApplicationController
     @answers.destroy
     redirect_to :back
   end
+
   private
-  def id_params
+  def destroy_params
     params.permit(:id)
   end
 end

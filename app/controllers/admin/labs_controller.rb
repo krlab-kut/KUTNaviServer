@@ -4,8 +4,12 @@ class Admin::LabsController < ApplicationController
     @places = Place.all
   end
 
+  def new
+    @lab = Lab.new
+  end
+
   def create
-    @lab = Lab.new(labs_params)
+    @lab = Lab.new(lab_params)
     if @lab.save
       redirect_to "/admin/#{:admin_id}/labs"
     else
@@ -13,12 +17,15 @@ class Admin::LabsController < ApplicationController
     end
   end
 
+  def show
+  end
+
   def edit
-    @lab = Lab.find(params[:id])
+    @lab = Lab.find(edit_params[:id])
   end
 
   def update
-    @lab = Lab.find(params[:id])
+    @lab = Lab.find(update_params[:id])
 
     if @lab.update(labs_params)
       redirect_to "/admin/#{:admin_id}/labs"
@@ -28,20 +35,25 @@ class Admin::LabsController < ApplicationController
   end
 
   def destroy
-    @lab = Lab.find(params[:id])
+    @lab = Lab.find(destroy_params[:id])
     @lab.destroy
     redirect_to "/admin/#{:admin_id}/labs"
   end
 
-  def new
-  end
-
-  def show
-  end
-
-
   private
-    def labs_params
-      params.require(:lab).permit(:name, :place_id)
-    end
+  def edit_params
+    params.permit(:id)
+  end
+
+  def update_params
+    params.permit(:id)
+  end
+
+  def destroy_params
+    params.permit(:id)
+  end
+
+  def lab_params
+    params.require(:lab).permit(:name, :place_id)
+  end
 end
